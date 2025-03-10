@@ -10,3 +10,6 @@
 [submodule "dunst"]
 	path = dunst
 	url = git@github.com:ForgottenScream/dunst-config.git
+[submodule "fonts"]
+	path = fonts
+	url = git@github.com:ForgottenScream/fonts.git
