@@ -7,3 +7,6 @@
 [submodule "tmuxp"]
 	path = tmuxp
 	url = git@github.com:ForgottenScream/tmuxp.git
+[submodule "dunst"]
+	path = dunst
+	url = git@github.com:ForgottenScream/dunst-config.git
