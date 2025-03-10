@@ -21,3 +21,9 @@ ln -sf "$HOME/.dotfiles/zsh/external" "$HOME/.config/zsh"
 ########
 #mkdir -p "$HOME/.config/tmux"
 #ln -sf "$HOME/.dotfiles/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
+
+#########
+# dunst #
+#########
+mkdir -p "$HOME/.config/dunst"
+ln -sf "$HOME/.dotfiles/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
