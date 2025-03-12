@@ -1,18 +1,18 @@
 [submodule "i3"]
 	path = i3
-	url = git@github.com:ForgottenScream/i3-config.git
+	url = https://github.com/ForgottenScream/i3-config.git
 [submodule "zsh"]
 	path = zsh
-	url = git@github.com:ForgottenScream/zsh.git
+	url = https://github.com/ForgottenScream/zsh.git
 [submodule "tmuxp"]
 	path = tmuxp
-	url = git@github.com:ForgottenScream/tmuxp.git
+	url = https://github.com/ForgottenScream/tmuxp.git
 [submodule "dunst"]
 	path = dunst
-	url = git@github.com:ForgottenScream/dunst-config.git
+	url = https://github.com/ForgottenScream/dunst-config.git
 [submodule "fonts"]
 	path = fonts
-	url = git@github.com:ForgottenScream/fonts.git
+	url = https://github.com/ForgottenScream/fonts.git
 [submodule "nvim"]
 	path = nvim
-	url = git@github.com:ForgottenScream/neovim-config.git
+	url = https://github.com/ForgottenScream/neovim-config.git
