@@ -1,0 +1,50 @@
+! General colors
+URxvt*foreground: #C6C6C6 
+URxvt*background: #1C1C1C 
+URxvt*cursorColor: #444444 
+
+! Black
+URxvt*color0: #303030 
+URxvt*color8: #444444 
+
+! Red
+URxvt*color1: #d75f5f 
+URxvt*color9: #d75f5f 
+
+! Green
+URxvt*color2: #87AF87 
+URxvt*color10: #87AF87 
+
+! Yellow
+URxvt*color3: #ffd75f 
+URxvt*color11: #ffd75f 
+
+! Blue
+URxvt*color4: #87afd7 
+URxvt*color12: #87afd7 
+
+! Magenta
+URxvt*color5: #afafd7 
+URxvt*color13: #afafd7 
+
+! Cyan
+URxvt*color6: #afd7ff 
+URxvt*color14: #afd7ff 
+
+! White
+URxvt*color7: #e4e4e4 
+URxvt*color15: #ffffff 
+
+! Font and Borders
+URxvt*font: xft:Inconsolata Nerd Font:size=16:antialias=true 
+URxvt*borderLess: false 
+URxvt*externalBorder: 0 
+URxvt*internalBorder: 4 
+URxvt*scrollBar: false 
+URxvt*saveLines: 5000 
+
+! Enable 256 colors
+URxvt*termName: rxvt-unicode-256color
+URxvt*colorMode: true
+URxvt*perl-ext-common: default,matcher
+URxvt*matcher.button: 1
