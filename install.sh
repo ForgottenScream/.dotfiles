@@ -36,3 +36,5 @@ ln -sf "$HOME/.dotfiles/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
 #########
 # Fonts #
 #########
+# mkdir -p "$XDG_DATA_HOME"
+# cp -rf "$HOME/.dotfiles/fonts" "$XDG_DATA_HOME"
