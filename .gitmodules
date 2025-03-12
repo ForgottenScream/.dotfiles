@@ -13,3 +13,6 @@
 [submodule "fonts"]
 	path = fonts
 	url = git@github.com:ForgottenScream/fonts.git
+[submodule "nvim"]
+	path = nvim
+	url = git@github.com:ForgottenScream/neovim-config.git
