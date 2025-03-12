@@ -1,4 +1,9 @@
 # This script will create the symbolic links between the dotfiles in this directory and the locations where they are meant to be in.
+#######
+# X11 #
+#######
+rm -rf "$HOME/.config/X11"
+ln -s "$HOME/.dotfiles/X11" "$HOME/.config"
 
 ######
 # i3 #
@@ -27,3 +32,9 @@ ln -sf "$HOME/.dotfiles/zsh/external" "$HOME/.config/zsh"
 #########
 mkdir -p "$HOME/.config/dunst"
 ln -sf "$HOME/.dotfiles/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
+
+#########
+# Fonts #
+#########
+mkdir -p "$XDG_DATA_HOME"
+cp -rf $HOME/.dotfiles/fonts" "$XDG_DATA_HOME"
