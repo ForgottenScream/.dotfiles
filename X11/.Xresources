@@ -1,50 +1,35 @@
-! General colors
-URxvt*foreground: #C6C6C6 
-URxvt*background: #1C1C1C 
-URxvt*cursorColor: #444444 
+! Set the font
+XTerm*faceName: Monospace
+XTerm*faceSize: 12
 
-! Black
-URxvt*color0: #303030 
-URxvt*color8: #444444 
+! Set the colors
+XTerm*foreground: white
+XTerm*background: black
+XTerm*color0: black
+XTerm*color1: red
+XTerm*color2: green
+XTerm*color3: yellow
+XTerm*color4: blue
+XTerm*color5: magenta
+XTerm*color6: cyan
+XTerm*color7: white
+XTerm*color8: grey
+XTerm*color9: lightred
+XTerm*color10: lightgreen
+XTerm*color11: lightyellow
+XTerm*color12: lightblue
+XTerm*color13: lightmagenta
+XTerm*color14: lightcyan
+XTerm*color15: brightwhite
 
-! Red
-URxvt*color1: #d75f5f 
-URxvt*color9: #d75f5f 
+! Set the cursor shape
+XTerm*cursorColor: green
+XTerm*cursorBlink: true
 
-! Green
-URxvt*color2: #87AF87 
-URxvt*color10: #87AF87 
+! Set the scrollbar
+XTerm*scrollBar: true
+XTerm*scrollTtyOutput: true
 
-! Yellow
-URxvt*color3: #ffd75f 
-URxvt*color11: #ffd75f 
+! Set the title
+XTerm*title: My Xterm
 
-! Blue
-URxvt*color4: #87afd7 
-URxvt*color12: #87afd7 
-
-! Magenta
-URxvt*color5: #afafd7 
-URxvt*color13: #afafd7 
-
-! Cyan
-URxvt*color6: #afd7ff 
-URxvt*color14: #afd7ff 
-
-! White
-URxvt*color7: #e4e4e4 
-URxvt*color15: #ffffff 
-
-! Font and Borders
-URxvt*font: xft:Inconsolata Nerd Font:size=16:antialias=true 
-URxvt*borderLess: false 
-URxvt*externalBorder: 0 
-URxvt*internalBorder: 4 
-URxvt*scrollBar: false 
-URxvt*saveLines: 5000 
-
-! Enable 256 colors
-URxvt*termName: rxvt-unicode-256color
-URxvt*colorMode: true
-URxvt*perl-ext-common: default,matcher
-URxvt*matcher.button: 1
