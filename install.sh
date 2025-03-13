@@ -2,38 +2,38 @@
 #######
 # X11 #
 #######
-rm -rf "$XDG_CONFIG_HOME/X11"
-ln -s "$DOTFILES/X11" "$XDG_CONFIG_HOME"
+rm -rf "$HOME/.config/X11"
+ln -s "$DOTFILES/X11" "$HOME/.config"
 #ln -s "$DOTFILES/X11/.xinitrc" "$HOME"
 #ln -s "$DOTFILES/X11/.Xresources" "$HOME"
 
 ######
 # i3 #
 ######
-rm -rf "$XDG_CONFIG_HOME/i3"
-ln -s "$DOTFILES/i3" "$XDG_CONFIG_HOME"
+rm -rf "$HOME/.config/i3"
+ln -s "$DOTFILES/i3" "$HOME/.config"
 
 #######
 # ZSH #
 #######
-mkdir -p "$XDG_CONFIG_HOME/zsh"
-ln -sf "$DOTFILES/zsh/.zshrc" "$XDG_CONFIG_HOME/zsh"
+mkdir -p "$HOME/.config/zsh"
+ln -sf "$DOTFILES/zsh/.zshrc" "$HOME/.config/zsh"
 ln -sf "$DOTFILES/zsh/.zshenv" "$HOME"
-ln -sf "$DOTFILES/zsh/aliases" "$XDG_CONFIG_HOME/zsh/aliases"
-rm -rf "$XDG_CONFIG_HOME/zsh/external"
-ln -sf "$DOTFILES/zsh/external" "$XDG_CONFIG_HOME/zsh"
+ln -sf "$DOTFILES/zsh/aliases" "$HOME/.config/zsh/aliases"
+rm -rf "$HOME/.config/zsh/external"
+ln -sf "$DOTFILES/zsh/external" "$HOME/.config/zsh"
 
 ########
 # TMUX #
 ########
-#mkdir -p "$XDG_CONFIG_HOME/tmux"
-#ln -sf "$DOTFILES/tmux/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
+#mkdir -p "$HOME/.config/tmux"
+#ln -sf "$DOTFILES/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
 
 #########
 # dunst #
 #########
-mkdir -p "$XDG_CONFIG_HOME/dunst"
-ln -sf "$DOTFILES/dunst/dunstrc" "$XDG_CONFIG_HOME/dunst/dunstrc"
+mkdir -p "$HOME/.config/dunst"
+ln -sf "$DOTFILES/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
 
 #########
 # Fonts #
