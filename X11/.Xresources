@@ -1,5 +1,5 @@
 ! Set the font
-XTerm*faceName: Monospace
+XTerm*faceName: Inconsolata Nerd Font Mono 
 XTerm*faceSize: 12
 
 ! Set the colors
