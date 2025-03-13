@@ -1,35 +1,60 @@
 ! Set the font
 XTerm*faceName: Inconsolata Nerd Font Mono 
+UXTerm*faceName: Inconsolata Nerd Font Mono
 XTerm*faceSize: 12
+UXTerm*faceSize: 12
 
 ! Set the colors
 XTerm*foreground: white
+UXTerm*foreground: white
 XTerm*background: black
+UXTerm*background: black
 XTerm*color0: black
+UXTerm*color0: black
 XTerm*color1: red
+UXTerm*color1: red
 XTerm*color2: green
+UXTerm*color2: green
 XTerm*color3: yellow
+UXTerm*color3: yellow
 XTerm*color4: blue
+UXTerm*color4: blue
 XTerm*color5: magenta
+UXTerm*color5: magenta
 XTerm*color6: cyan
+UXTerm*color6: cyan
 XTerm*color7: white
+UXTerm*color7: white
 XTerm*color8: grey
+UXTerm*color8: grey
 XTerm*color9: lightred
+UXTerm*color9: lightred
 XTerm*color10: lightgreen
+UXTerm*color10: lightgreen
 XTerm*color11: lightyellow
+UXTerm*color11: lightyellow
 XTerm*color12: lightblue
+UXTerm*color12: lightblue
 XTerm*color13: lightmagenta
+UXTerm*color13: lightmagenta
 XTerm*color14: lightcyan
+UXTerm*color14: lightcyan
 XTerm*color15: brightwhite
+UXTerm*color15: brightwhite
 
 ! Set the cursor shape
 XTerm*cursorColor: green
+UXTerm*cursorColor: green
 XTerm*cursorBlink: true
+UXTerm*cursorBlink: true
 
 ! Set the scrollbar
 XTerm*scrollBar: true
+UXTerm*scrollBar: true
 XTerm*scrollTtyOutput: true
+UXTerm*scrollTtyOutput: true
 
 ! Set the title
-XTerm*title: My Xterm
+XTerm*title: Terminal 
+UXTerm*title: Terminal 
 
