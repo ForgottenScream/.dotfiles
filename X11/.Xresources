@@ -49,8 +49,8 @@ XTerm*cursorBlink: true
 UXTerm*cursorBlink: true
 
 ! Set the scrollbar
-XTerm*scrollBar: true
-UXTerm*scrollBar: true
+XTerm*scrollBar: false 
+UXTerm*scrollBar: false 
 XTerm*scrollTtyOutput: true
 UXTerm*scrollTtyOutput: true
 
