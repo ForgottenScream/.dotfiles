@@ -1,8 +1,7 @@
-urxvtd -o -q -f
 udiskie &
 xrdb -merge ~/.config/X11/.Xresources
 
-setxkbmap gb -variant colemak
+setxkbmap -layout gb,gb -variant colemak, -option grp:alt_shift_toggle'
 
 xcape -e 'Shift_L=Escape'&
  
