@@ -1,7 +1,6 @@
 udiskie &
-xrdb -merge ~/.config/X11/.Xresources
 
-#setxkbmap -layout gb,gb -variant colemak, -option grp:alt_shift_toggle'
+xrdb -merge ~/.config/X11/.Xresources
 
 xcape -e 'Shift_L=Escape'&
  
