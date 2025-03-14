@@ -1,11 +1,20 @@
 # This script will create the symbolic links between the dotfiles in this directory and the locations where they are meant to be in.
+
+########
+# nvim #
+########
+mkdir -p "$HOME/.config/nvim"
+mkdir -p "$HOME/.config/nvim/undo"
+
+ln -sf "$HOME/.dotfiles/nvim/init.lua" "$HOME/.config/nvim"
+ln -sf "$HOME/.dotfiles/nvim/lua/" "$HOME/.config/nvim"
+
+
 #######
 # X11 #
 #######
 rm -rf "$HOME/.config/X11"
 ln -s "$HOME/.dotfiles/X11" "$HOME/.config"
-#ln -s "$HOME/.dotfiles/X11/.xinitrc" "$HOME"
-#ln -s "$HOME/.dotfiles/X11/.Xresources" "$HOME"
 
 ######
 # i3 #
