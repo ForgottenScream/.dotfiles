@@ -51,3 +51,11 @@ ln -sf "$HOME/.dotfiles/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
 #########
 # mkdir -p "$XDG_DATA_HOME"
 # cp -rf "$HOME/.dotfiles/fonts" "$XDG_DATA_HOME"
+
+############
+# Newsboat #
+############
+rm -rf "$HOME/.newsboat"
+mkdir -p "$HOME/.newsboat"
+ln -sf "$DOTFILES/newsboat/urls" "$HOME/.newsboat/urls"
+
