@@ -59,3 +59,8 @@ rm -rf "$HOME/.newsboat"
 mkdir -p "$HOME/.newsboat"
 ln -sf "$DOTFILES/newsboat/urls" "$HOME/.newsboat/urls"
 
+################
+# Task Warrior #
+################
+mkdir -p "$HOME/.config/task"
+ln -sf "$HOME/.dotfiles/task/.taskrc" "$HOME/.config/task/taskrc"
