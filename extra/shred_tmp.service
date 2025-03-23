@@ -1,0 +1,9 @@
+[UNIT]
+Description=Shred files in /tmp on shutdown
+
+[Service]
+Type=oneshot
+ExecStart=$DOTFILES/extra/shred_tmp.sh
+
+[Install]
+WantedBy=halt.target reboot.target
