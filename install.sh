@@ -37,8 +37,8 @@ ln -sf "$HOME/.dotfiles/zsh/external" "$HOME/.config/zsh"
 ########
 # TMUX #
 ########
-#mkdir -p "$HOME/.config/tmux"
-#ln -sf "$HOME/.dotfiles/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
+mkdir -p "$HOME/.config/tmux"
+ln -sf "$DOTFILES/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
 
 #########
 # dunst #
@@ -49,8 +49,8 @@ ln -sf "$HOME/.dotfiles/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
 #########
 # Fonts #
 #########
-# mkdir -p "$XDG_DATA_HOME"
-# cp -rf "$HOME/.dotfiles/fonts" "$XDG_DATA_HOME"
+ mkdir -p "$HOME/.config/local/share"
+ cp -rf "$HOME/.dotfiles/fonts" "$HOME/.config/local/share"
 
 ############
 # Newsboat #
