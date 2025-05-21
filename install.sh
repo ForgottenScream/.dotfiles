@@ -3,9 +3,8 @@
 ########
 # nvim #
 ########
-mkdir -p "$HOME/.config/nvim"
-
-ln -sf "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
+rm -rf "$HOME/.config/nvim"
+ln -sf "$HOME/.dotfiles/nvim" "$HOME/.config"
 
 #######
 # X11 #
