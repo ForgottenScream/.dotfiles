@@ -4,11 +4,8 @@
 # nvim #
 ########
 mkdir -p "$HOME/.config/nvim"
-mkdir -p "$HOME/.config/nvim/undo"
 
-ln -sf "$HOME/.dotfiles/nvim/init.lua" "$HOME/.config/nvim"
-ln -sf "$HOME/.dotfiles/nvim/lua/" "$HOME/.config/nvim"
-
+ln -sf "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
 
 #######
 # X11 #
