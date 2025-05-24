@@ -40,7 +40,7 @@ ln -sf "$DOTFILES/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
 # Picom #
 #########
 mkdir -p "$HOME/.config/picom"
-ln -sf "$DOTFILES/picom/picom.conf" "$HOME/.config/picom.conf"
+ln -sf "$DOTFILES/picom/picom.conf" "$HOME/.config/picom/picom.conf"
 #########
 # dunst #
 #########
