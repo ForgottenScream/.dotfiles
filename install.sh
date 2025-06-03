@@ -51,7 +51,7 @@ ln -sf "$HOME/.dotfiles/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
 # Fonts #
 #########
  mkdir -p "$HOME/.config/local/share"
- cp -rf "$HOME/.dotfiles/fonts" "$HOME/.config/local/share"
+ cp -rf "$HOME/.dotfiles/font" "$HOME/.config/local/share"
 
 ############
 # Newsboat #
