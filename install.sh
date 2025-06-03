@@ -33,8 +33,8 @@ ln -sf "$HOME/.dotfiles/zsh/external" "$HOME/.config/zsh"
 ########
 # TMUX #
 ########
-mkdir -p "$HOME/.config/tmux"
-ln -sf "$DOTFILES/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
+rm -rf "$HOME/.config/tmux"
+ln -sf "$DOTFILES/tmux" "$HOME/.config/"
 
 #########
 # Picom #
