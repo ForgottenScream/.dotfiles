@@ -1,6 +1,8 @@
 session_name: dotfiles
 start_directory: $DOTFILES
 
+env:
+  TMUX_CONTENT: Dev
 windows:
   - window_name: nvim dotfiles
     layout: tiled
