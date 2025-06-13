@@ -1,16 +1,13 @@
-session_name: dotfiles
+session_name: Dotfiles
 start_directory: $DOTFILES
 
-env:
-  TMUX_CONTENT: Dev
 windows:
-  - window_name: nvim dotfiles
+  - window_name: nvim
     layout: tiled
     panes:
       - nvim
   - window_name: terms
     layout: tiled
     panes:
-      -
       - ls -lah
 
