@@ -1,5 +1,5 @@
-session_name: DEV
-start_directory: $HOME
+session_name: Dotfiles
+start_directory: $DOTFILES
 
 windows:
   - window_name: nvim
