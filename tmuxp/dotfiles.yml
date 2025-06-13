@@ -6,8 +6,8 @@ windows:
     layout: tiled
     panes:
       - nvim
-  - window_name: terms
+  - window_name: lazygit
     layout: tiled
     panes:
-      - ls -lah
+      - lazygit
 
