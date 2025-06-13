@@ -37,6 +37,12 @@ rm -rf "$HOME/.config/tmux"
 ln -sf "$DOTFILES/tmux" "$HOME/.config/"
 
 #########
+# TMUXP #
+#########
+rm -rf "$HOME/.config/tmuxp"
+ln -sf "$DOTFILES/tmuxp" "$HOME/.config"
+
+#########
 # Picom #
 #########
 mkdir -p "$HOME/.config/picom"
