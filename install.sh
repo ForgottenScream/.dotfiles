@@ -23,12 +23,8 @@ ln -s "$HOME/.dotfiles/i3" "$HOME/.config"
 #######
 # ZSH #
 #######
-mkdir -p "$HOME/.config/zsh"
-ln -sf "$HOME/.dotfiles/zsh/.zshrc" "$HOME/.config/zsh"
-ln -sf "$HOME/.dotfiles/zsh/.zshenv" "$HOME"
-ln -sf "$HOME/.dotfiles/zsh/aliases" "$HOME/.config/zsh/aliases"
-rm -rf "$HOME/.config/zsh/external"
-ln -sf "$HOME/.dotfiles/zsh/external" "$HOME/.config/zsh"
+rm -rf "$HOME/.config/zsh"
+ln -sf "$HOME/.dotfiles/zsh" "$HOME/.config"
 
 ########
 # TMUX #
@@ -45,19 +41,21 @@ ln -sf "$HOME/.dotfiles/tmuxp" "$HOME/.config"
 #########
 # Picom #
 #########
-mkdir -p "$HOME/.config/picom"
-ln -sf "$HOME/.dotfiles/picom/picom.conf" "$HOME/.config/picom/picom.conf"
+rm -rf "$HOME/.config/picom"
+ln -sf "$HOME/.dotfiles/picom" "$HOME/.config"
+
 #########
 # dunst #
 #########
-mkdir -p "$HOME/.config/dunst"
-ln -sf "$HOME/.dotfiles/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
+rm -rf "$HOME/.config/dunst"
+ln -sf "$HOME/.dotfiles/dunst" "$HOME/.config"
 
 #########
 # Fonts #
 #########
- mkdir -p "$HOME/.config/local/share"
- cp -rf "$HOME/.dotfiles/font" "$HOME/.config/local/share"
+mkdir -p "$HOME/.local/share/font"
+cp -rf "$HOME/.dotfiles/font" "$HOME/local/share/font/"
+fc-cache -f "$HOME/.local/share/fonts"
 
 ############
 # Newsboat #
