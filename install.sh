@@ -30,7 +30,7 @@ ln -sf "$HOME/.dotfiles/zsh" "$HOME/.config"
 # TMUX #
 ########
 rm -rf "$HOME/.config/tmux"
-ln -sf "$HOME/.dotfiles/tmux" "$HOME/config/"
+ln -sf "$HOME/.dotfiles/tmux" "$HOME/.config/"
 
 #########
 # TMUXP #
@@ -54,7 +54,7 @@ ln -sf "$HOME/.dotfiles/dunst" "$HOME/.config"
 # Fonts #
 #########
 mkdir -p "$HOME/.local/share/fonts"
-cp -rf "$HOME/.dotfiles/fonts" "$HOME/.local/share/fonts/"
+cp -rf "$HOME/.dotfiles/fonts" "$HOME/.local/share"
 fc-cache -f "$HOME/.local/share/fonts"
 
 ############
