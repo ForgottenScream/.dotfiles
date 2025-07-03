@@ -53,8 +53,8 @@ ln -sf "$HOME/.dotfiles/dunst" "$HOME/.config"
 #########
 # Fonts #
 #########
-mkdir -p "$HOME/.local/share/font"
-cp -rf "$HOME/.dotfiles/font" "$HOME/local/share/font/"
+mkdir -p "$HOME/.local/share/fonts"
+cp -rf "$HOME/.dotfiles/fonts" "$HOME/.local/share/fonts/"
 fc-cache -f "$HOME/.local/share/fonts"
 
 ############
