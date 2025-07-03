@@ -34,19 +34,19 @@ ln -sf "$HOME/.dotfiles/zsh/external" "$HOME/.config/zsh"
 # TMUX #
 ########
 rm -rf "$HOME/.config/tmux"
-ln -sf "$DOTFILES/tmux" "$HOME/.config/"
+ln -sf "$HOME/.dotfiles/tmux" "$HOME/config/"
 
 #########
 # TMUXP #
 #########
 rm -rf "$HOME/.config/tmuxp"
-ln -sf "$DOTFILES/tmuxp" "$HOME/.config"
+ln -sf "$HOME/.dotfiles/tmuxp" "$HOME/.config"
 
 #########
 # Picom #
 #########
 mkdir -p "$HOME/.config/picom"
-ln -sf "$DOTFILES/picom/picom.conf" "$HOME/.config/picom/picom.conf"
+ln -sf "$HOME/.dotfiles/picom/picom.conf" "$HOME/.config/picom/picom.conf"
 #########
 # dunst #
 #########
@@ -64,7 +64,7 @@ ln -sf "$HOME/.dotfiles/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
 ############
 rm -rf "$HOME/.newsboat"
 mkdir -p "$HOME/.newsboat"
-ln -sf "$DOTFILES/newsboat/urls" "$HOME/.newsboat/urls"
+ln -sf "$HOME/.dotfiles/newsboat/urls" "$HOME/.newsboat/urls"
 
 ################
 # Task Warrior #
