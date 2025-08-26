@@ -1,0 +1,269 @@
+# i3 config file
+
+## Main Functionality
+
+# Basic Definitions
+set $mod Mod4
+
+# i3 Window Manager Settings
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# mouse focus
+focus_follows_mouse no
+
+# back and forth between workspaces
+workspace_auto_back_and_forth yes
+
+# drag using title bar
+tiling_drag modifier titlebar
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+n focus left
+bindsym $mod+e focus down
+bindsym $mod+i focus up
+bindsym $mod+o focus right
+
+# alternate way to change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+n move left
+bindsym $mod+Shift+e move down
+bindsym $mod+Shift+i move up
+bindsym $mod+Shift+o move right
+
+# alternate way to move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+Shift+h split h
+
+# split in vertical orientation
+bindsym $mod+Shift+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+t fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+Shift+r layout stacking
+bindsym $mod+Shift+w layout tabbed
+bindsym $mod+Shift+f layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Define names for default workspaces for which we configure key bindings later on.
+set $terminal "1: Terminal"
+set $browser "2: Browser"
+set $communication "3: Communication"
+set $code "4: Code"
+set $media "5: Media"
+
+# Define output for workspaces
+workspace "5: Media" output HDMI-1
+
+# switch to workspace
+bindsym $mod+1 workspace $terminal
+bindsym $mod+2 workspace $browser
+bindsym $mod+3 workspace $communication
+bindsym $mod+4 workspace $code
+bindsym $mod+5 workspace $media
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $terminal
+bindsym $mod+Shift+2 move container to workspace $browser
+bindsym $mod+Shift+3 move container to workspace $communication
+bindsym $mod+Shift+4 move container to workspace $code
+bindsym $mod+Shift+5 move container to workspace $media
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+p restart
+###################################################################################
+#set shut down, restart and locking features
+mode "$mode_system" {
+	bindsym l exec --no-startup-id ~/.config/i3/scripts/lock.sh, mode "default"
+	bindsym e exec --no-startup-id i3-msg exit, mode "default"
+	bindsym r exec --no-startup-id systemctl reboot, mode "default"
+	bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+	#to exit system mode use 'Enter' or 'Escape'
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+set $mode_system (l)ock, (e)xit, (r)eboot, (s)hutdown
+bindsym $mod+BackSpace mode "$mode_system"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym n resize shrink width 20 px or 20 ppt
+        bindsym e resize grow height 20 px or 20 ppt
+        bindsym i resize shrink height 20 px or 20 ppt
+        bindsym o resize grow width 20 px or 20 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+p
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+p mode "default"
+}
+
+bindsym $mod+p mode "resize"
+
+#################################################################################
+######## Scratchpads ##########
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+Shift+plus scratchpad show
+
+
+# Start i3bar to display a workspace bar
+bar {
+    status_command i3status --config ~/.config/i3/i3status.conf
+    position top
+    tray_output none
+    colors {
+        background $black1
+        statusline $white2
+        separator $white2
+        #                    border background text
+        focused_workspace    $background $background $red1
+        active_workspace     $black2 $black1 $white2
+        inactive_workspace   $black1 $black2 $foreground
+        urgent_workspace     $red1 $red1 $white2
+        binding_mode         $background $red2 $white2
+    }
+}
+## Personalization
+
+##Colors
+
+# special
+set_from_resource $foreground foreground #C6C6C6
+set_from_resource $background background #1C1C1C
+set_from_resource $cursorColor cursorColor #C6C6C6
+
+# black
+set_from_resource $black1 color0 #303030
+set_from_resource $black2 color8 #444444
+set $trueblack #000000
+
+# red
+set_from_resource $red1 color1 #d75f5f
+set_from_resource $red2 color9 #d75f5f
+
+# green
+set_from_resource $green1 color2 #87AF87
+set_from_resource $green2 color10 #87AF87
+
+# yellow
+set_from_resource $yellow1 color3 #ffd75f
+set_from_resource $yellow2 color11 #ffd75f
+
+# blue
+set_from_resource $blue1 color4 #87afd7
+set_from_resource $blue2 color12 #87afd7
+
+# magenta
+set_from_resource $cyan1 color5 #afafd7
+set_from_resource $cyan2 color13 #afafd7
+
+# cyan
+set_from_resource $cyan1 color6 #afd7ff
+set_from_resource $cyan2 color14 #afd7ff
+
+# white
+set_from_resource $white1 color7 #4E4E4E
+set_from_resource $white2 color15 #ffffff
+
+##########
+# DESIGN #
+##########
+
+# hide borders
+default_border none 
+
+# class border backgr. text indicator child_border
+client.focused #333333 $black2 $white2 #285577
+client.focused_inactive #333333 $background $foreground #484e50
+client.unfocused #333333 #222222 #888888 #292d2e #222222
+client.urgent $red1 $red1 $white2 $red1 $red1
+client.placeholder #000000 #0c0c0c $white2 #000000 #0c0c0c
+
+# Font
+font pango:Inconsolata Nerd Font 16 
+
+# Display Wallpaper
+exec_always feh --no-fehbg --bg-fill $HOME/.local/share/backgrounds/backgroundLM8.jpeg
+
+## Applications
+
+# Important stuff
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id togglekb
+exec --no-startup-id xsetroot -cursor_name left_ptr
+exec --no-startup-id redshift -O 4500
+exec --no-startup-id flameshot
+
+# Brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+
+# Audio
+set $refresh_i3status killall -SIGUSR1 i3status ##refreshes the i3status bar when changing audio
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Autostart Applications
+exec --no-startup-id dunst
+exec --no-startup-id picom
+exec --no-startup-id env CM_MAX_CLIPS=50 clipmenud
+
+# Assign applications to workspaces
+assign [class="Mullvad Browser"] workspace $browser
+assign [class="Signal"] workspace $communication
+
+# Switch to workspace when specific application is opened / other things
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+# Keyboard Shortcuts
+bindsym $mod+Shift+S exec flameshot gui
+bindsym $mod+v exec clipmenu
+bindsym $mod+s exec signal-desktop
+bindsym $mod+f exec firefox
+bindsym $mod+m exec $HOME/mullvad-browser/Browser/start-mullvad-browser
+bindsym $mod+d exec --no-startup-id dmenu_run
+
+
+# Rotate screen with Ctrl + Alt + Arrow keys
+bindsym $mod+CTRL+Up exec --no-startup-id xrandr --output eDP1 --rotate normal
+bindsym $mod+CTRL+Down exec --no-startup-id xrandr --output eDP1 --rotate inverted
+bindsym $mod+CTRL+Left exec --no-startup-id xrandr --output eDP1 --rotate left
+bindsym $mod+CTRL+Right exec --no-startup-id xrandr --output eDP1 --rotate right
