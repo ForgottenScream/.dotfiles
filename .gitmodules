@@ -2,7 +2,3 @@
 	path = nvim
 	url = https://github.com/ForgottenScream/neovim-config.git
 	branch = main
-[submodule "tmux"]
-	path = tmux
-	url = https://github.com/ForgottenScream/tmux_config.git
-	branch = main
