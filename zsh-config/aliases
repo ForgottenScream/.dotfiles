@@ -1,0 +1,28 @@
+#Arch Based Aliases
+alias update='sudo pacman -Syu --noconfirm && pikaur -Syu'
+alias clean='sudo pacman -Rns $(pacman -Qtdq) && sudo pacman -Scc && yay -Yc'
+alias sps='sudo pacman -S --needed --noconfirm'
+alias spss='sudo pacman -Ss'
+alias spr='sudo pacman -Rns --noconfirm'
+
+#General Terminal Aliases
+alias l='ls --color=auto -lah'
+alias grep='grep --color=auto'
+alias sd='sudo shutdown now'
+alias q='exit'
+alias shred='shred -vfzu'
+
+#Useful Aliases
+alias tool='curl -fsSL https://christitus.com/linux | sh'
+
+#i3 Based Aliases
+alias i3config='nvim "$HOME/.dotfiles/i3/config"'
+alias i3status='nvim "$HOME/.dotfiles/i3/i3status.conf"'
+alias kb='setxkbmap -layout gb,gb -variant colemak, -option grp:alt_shift_toggle'
+
+#Music File Manipulation Aliases
+alias removepicflac='metaflac --remove --block-type=PICTURE,PADDING --dont-use-padding'
+alias removepicmp3='eyeD3 --remove-all-images'
+
+#ZSH Aliases
+alias n='nvim'
