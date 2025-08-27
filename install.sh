@@ -33,12 +33,6 @@ rm -rf "$HOME/.config/tmux"
 ln -sf "$HOME/.dotfiles/tmux" "$HOME/.config/"
 
 #########
-# TMUXP #
-#########
-rm -rf "$HOME/.config/tmuxp"
-ln -sf "$HOME/.dotfiles/tmuxp" "$HOME/.config"
-
-#########
 # Picom #
 #########
 rm -rf "$HOME/.config/picom"
@@ -63,9 +57,3 @@ fc-cache -f "$HOME/.local/share/fonts"
 rm -rf "$HOME/.newsboat"
 mkdir -p "$HOME/.newsboat"
 ln -sf "$HOME/.dotfiles/newsboat/urls" "$HOME/.newsboat/urls"
-
-################
-# Task Warrior #
-################
-mkdir -p "$HOME/.config/task"
-ln -sf "$HOME/.dotfiles/task/.taskrc" "$HOME/.config/task/taskrc"
