@@ -8,10 +8,28 @@ local signs = {
 	Info  = "i",
 }
 
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+vim.diagnostic.config({
+        signs = {
+                text = {
+                        [vim.diagnostic.severity.ERROR] = "X ",
+                        [vim.diagnostic.severity.WARN] = "! ",
+                        [vim.diagnostic.severity.INFO] = "? ",
+                        [vim.diagnostic.severity.HINT] = "i ",
+                },
+                texthl = {
+                        [vim.diagnostic.severity.ERROR] = "Error",
+                        [vim.diagnostic.severity.WARN] = "Warn",
+                        [vim.diagnostic.severity.HINT] = "Hint",
+                        [vim.diagnostic.severity.INFO] = "Info",
+                },
+                numhl = {
+                        [vim.diagnostic.severity.ERROR] = "",
+                        [vim.diagnostic.severity.WARN] = "",
+                        [vim.diagnostic.severity.HINT] = "",
+                        [vim.diagnostic.severity.INFO] = "",
+                },
+        },
+})
 
 -- Buffer-local LSP keybindings + format on save
 vim.api.nvim_create_autocmd("LspAttach", {
