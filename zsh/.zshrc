@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-source "$XDG_CONFIG_HOME/zsh/aliases"
+source "$HOME/.config/zsh/aliases"
 
 export VISUAL=nvim
 export EDITOR=nvim
@@ -33,11 +33,12 @@ fi
 
 [ -f "/home/n/.ghcup/env" ] && . "/home/n/.ghcup/env" # ghcup-env
 
-export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
-export PATH=$JAVA_HOME/bin:$PATH
+#export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+#export PATH=$JAVA_HOME/bin:$PATH
 
+xrdb -merge ~/.dotfiles/X11/.Xresources
 
 ###################################################################
 #Needs to be sourced last so everything else needs to be above ^^^#
 ###################################################################
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
