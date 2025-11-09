@@ -1,13 +1,5 @@
 local lspconfig = require("lspconfig")
 
--- Custom diagnostic icons
-local signs = {
-	Error = "X",
-	Warn  = "!",
-	Hint  = "?",
-	Info  = "i",
-}
-
 vim.diagnostic.config({
         signs = {
                 text = {
@@ -31,17 +23,19 @@ vim.diagnostic.config({
         },
 })
 
--- Buffer-local LSP keybindings + format on save
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
+		local bufnr = args.buf
+		local client = vim.lsp.get_client_by_id(args.data.client.id)
+
 		local map = function(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, {
-				buffer = args.buf,
-				desc = desc,
-				silent = true,
-				noremap = true,
-			})
-		end
+        	buffer = bufnr,
+        	desc = desc,
+        	silent = true,
+        	noremap = true,
+      	})
+    	end
 
 		-- Navigation and info
 		map("n", "gd", vim.lsp.buf.definition, "Go to Definition")
@@ -53,19 +47,29 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- Code actions and refactors
 		map("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
 		map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
+		map("c", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
 
 		-- Formatting
 		map("n", "<leader>f", function()
 			vim.lsp.buf.format({ async = true })
 		end, "Format Buffer")
 
-		-- Format on save
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			buffer = args.buf,
 			callback = function()
 				vim.lsp.buf.format({ async = false })
 			end,
 		})
+
+		-- JDTLS (Java only)
+    	if client and client.name == "jdtls" then
+		  	local ok, jdtls = pcall(require, "jdtls")
+      		if ok then
+       			map("n", "<leader>oi", jdtls.organize_imports, "Java: Organize imports")
+				map("n", "<leader>tc", jdtls.test_class, "Java: Test class")
+        		map("n", "<leader>tm", jdtls.test_nearest_method, "Java: Test method")
+      		end
+  		end
 	end,
 })
 
