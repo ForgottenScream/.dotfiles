@@ -52,3 +52,25 @@ vim.g.netrw_liststyle = 3    -- Tree-style view (1=long, 2=short, 3=tree)
 vim.g.netrw_browse_split = 4 -- Open files in previous window
 vim.g.netrw_altv = 1         -- When splitting vertically, open on left
 vim.g.netrw_winsize = 25     -- Set default size of explorer window
+
+
+-- Auto-save after 2 seconds of inactivity
+local timer = vim.loop.new_timer()
+
+vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+  pattern = "*",
+  callback = function()
+    timer:stop()
+    timer:start(2000, 0, vim.schedule_wrap(function()
+      -- Only save if the buffer is modifiable and not read-only
+      if vim.bo.modifiable and not vim.bo.readonly then
+        vim.cmd("silent! write")
+		vim.api.nvim_echo({ { "Auto-saved", "ModeMsg" } }, false, {})
+		vim.defer_fn(function()
+			vim.cmd("echo ''")
+		end, 2000)
+      end
+    end))
+  end,
+  desc = "Auto-save 2 seconds after last edit",
+})
