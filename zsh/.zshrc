@@ -17,7 +17,7 @@ fpath=($ZDOTDIR/external $fpath)
 
 if [ $(command -v "fzf") ]; then
 #    source /usr/share/fzf/completion.zsh
-    source /usr/share/fzf/key-bindings.zsh
+#    source /usr/share/fzf/key-bindings.zsh
 fi
 
 # Auto start i3

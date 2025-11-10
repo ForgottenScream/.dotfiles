@@ -58,6 +58,7 @@ fc-cache -f "$HOME/.local/share/fonts"
 rm -rf "$HOME/.newsboat"
 mkdir -p "$HOME/.newsboat"
 ln -sf "$HOME/.dotfiles/newsboat/urls" "$HOME/.newsboat/urls"
+ln -sf "$HOME/.dotfiles/newsboat/.config" "$HOME/.newsboat/.config"
 
 ###########
 # Latexmk #
