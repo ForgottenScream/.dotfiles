@@ -1,8 +1,8 @@
 ! Set the font
 XTerm*faceName: Inconsolata Nerd Font Mono 
 UXTerm*faceName: Inconsolata Nerd Font Mono
-XTerm*faceSize: 12
-UXTerm*faceSize: 12
+XTerm*faceSize: 18
+UXTerm*faceSize: 18
 
 ! Set the colors
 XTerm*foreground: white

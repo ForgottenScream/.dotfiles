@@ -9,6 +9,7 @@ macro l set browser "/usr/local/bin/mullvad-browser %u"; open-in-browser ; set b
 
 # unbind keys
 unbind-key ENTER
+unbind-key q // quit
 unbind-key j
 unbind-key k
 unbind-key J
