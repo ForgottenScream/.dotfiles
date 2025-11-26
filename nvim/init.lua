@@ -1,3 +1,2 @@
-require("core")
-require("ui")
-require("lsp")
+require("forgottenscream.core")
+require("forgottenscream.lazy")
