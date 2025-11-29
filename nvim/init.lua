@@ -1,2 +1,2 @@
-require("forgottenscream.core")
-require("forgottenscream.lazy")
+require("forgottenscream")
+require("forgottenscream")
