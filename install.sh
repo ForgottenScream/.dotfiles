@@ -26,6 +26,7 @@ ln -s "$HOME/.dotfiles/i3" "$HOME/.config"
 rm -rf "$HOME/.config/zsh"
 ln -sf "$HOME/.dotfiles/zsh" "$HOME/.config"
 ln -sf "$HOME/.dotfiles/zsh/.zshrc" "$HOME"
+ln -sf "$HOME/.dotfiles/zsh/.zshenv" "$HOME"
 
 ########
 # TMUX #
