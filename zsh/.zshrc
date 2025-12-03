@@ -14,10 +14,10 @@ _comp_options+=(globdots)
 source ~/.dotfiles/zsh/external/completion.zsh
 
 fpath=($ZDOTDIR/external $fpath)
+autoload -Uz prompt_purification_setup && prompt_purification_setup
 
 if [ $(command -v "fzf") ]; then
-#    source /usr/share/fzf/completion.zsh
-#    source /usr/share/fzf/key-bindings.zsh
+    source /usr/share/fzf/shell/key-bindings.zsh
 fi
 
 # Auto start i3
@@ -31,13 +31,11 @@ if command -v tmux &>/dev/null && [[ -z "$TMUX" ]] && [[ "$TERM" != "linux" ]]; 
 	tmux attach-session -t default 2>/dev/null || tmux new-session -s default
 fi
 
-[ -f "/home/n/.ghcup/env" ] && . "/home/n/.ghcup/env" # ghcup-env
-
-#export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
-#export PATH=$JAVA_HOME/bin:$PATH
-export PATH="$(go env GOPATH)/bin:$PATH"
-
 xrdb -merge ~/.dotfiles/X11/.Xresources
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
 
 ###################################################################
 #Needs to be sourced last so everything else needs to be above ^^^#
