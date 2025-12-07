@@ -1,5 +1,6 @@
 -- lua/core/keymaps.lua
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 local map = vim.keymap.set
 
@@ -7,10 +8,17 @@ local map = vim.keymap.set
 -- Core / config
 -- =====================================================================
 map("n", "<leader>rc", ":source $MYVIMRC<CR>", { desc = "Reload config" })
-map("n", "<leader>ch", ":nohl<CR>", { desc = "Clear search highlights" })
+map("n", "<leader>ch", ":nohl<CR>", { desc = "Clear highlights" })
 
 map("i", "tn", "<Esc>", { noremap = true, silent = true })
 map("i", "<Esc>", "<Nop>", { noremap = true, silent = true })
+
+-- Move lines up/down
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+
 -- =====================================================================
 -- Files / explorer
 -- =====================================================================
