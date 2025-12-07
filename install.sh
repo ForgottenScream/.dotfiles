@@ -3,54 +3,55 @@
 ########
 # nvim #
 ########
-rm -rf "$HOME/.config/nvim"
-ln -sf "$HOME/.dotfiles/nvim" "$HOME/.config"
+rm -rf "$XDG_CONFIG_HOME/nvim"
+ln -sf "$DOTFILES/nvim" "$XDG_CONFIG_HOME"
 
 #######
 # X11 #
 #######
-rm -rf "$HOME/.config/X11"
+rm -rf "$XDG_CONFIG_HOME/X11"
 rm -rf "$HOME/.xinitrc"
-ln -s "$HOME/.dotfiles/X11/" "$HOME/.config/X11"
-ln -s "$HOME/.dotfiles/X11/.xinitrc" "$HOME"
+ln -s "$DOTFILES/X11/" "$XDG_CONFIG_HOME/X11"
+ln -s "$DOTFILES/X11/.xinitrc" "$HOME"
 
 ######
 # i3 #
 ######
-rm -rf "$HOME/.config/i3"
-ln -s "$HOME/.dotfiles/i3" "$HOME/.config"
+rm -rf "$XDG_CONFIG_HOME/i3"
+ln -s "$DOTFILES/i3" "$XDG_CONFIG_HOME"
 
 #######
 # ZSH #
 #######
-rm -rf "$HOME/.config/zsh"
-ln -sf "$HOME/.dotfiles/zsh" "$HOME/.config"
-ln -sf "$HOME/.dotfiles/zsh/.zshrc" "$HOME"
-ln -sf "$HOME/.dotfiles/zsh/.zshenv" "$HOME"
+rm -rf "$XDG_CONFIG_HOME/zsh"
+ln -sf "$DOTFILES/zsh" "$XDG_CONFIG_HOME"
+ln -sf "$DOTFILES/zsh/.zshrc" "$HOME"
+ln -sf "$DOTFILES/zsh/.zshenv" "$HOME"
+ln -sf "$DOTFILES/zsh/.path" "$HOME"
 
 ########
 # TMUX #
 ########
-rm -rf "$HOME/.config/tmux"
-ln -sf "$HOME/.dotfiles/tmux" "$HOME/.config/"
+rm -rf "$XDG_CONFIG_HOME/tmux"
+ln -sf "$DOTFILES/tmux" "$XDG_CONFIG_HOME/"
 
 #########
 # Picom #
 #########
-rm -rf "$HOME/.config/picom"
-ln -sf "$HOME/.dotfiles/picom" "$HOME/.config"
+rm -rf "$XDG_CONFIG_HOME/picom"
+ln -sf "$DOTFILES/picom" "$XDG_CONFIG_HOME"
 
 #########
 # dunst #
 #########
-rm -rf "$HOME/.config/dunst"
-ln -sf "$HOME/.dotfiles/dunst" "$HOME/.config"
+rm -rf "$XDG_CONFIG_HOME/dunst"
+ln -sf "$DOTFILES/dunst" "$XDG_CONFIG_HOME"
 
 #########
 # Fonts #
 #########
 mkdir -p "$HOME/.local/share/fonts"
-cp -rf "$HOME/.dotfiles/fonts" "$HOME/.local/share"
+cp -rf "$DOTFILES/fonts" "$HOME/.local/share"
 fc-cache -f "$HOME/.local/share/fonts"
 
 ############
@@ -58,10 +59,10 @@ fc-cache -f "$HOME/.local/share/fonts"
 ############
 rm -rf "$HOME/.newsboat"
 mkdir -p "$HOME/.newsboat"
-ln -sf "$HOME/.dotfiles/newsboat/urls" "$HOME/.newsboat/urls"
-ln -sf "$HOME/.dotfiles/newsboat/config" "$HOME/.newsboat/config"
+ln -sf "$DOTFILES/newsboat/urls" "$HOME/.newsboat/urls"
+ln -sf "$DOTFILES/newsboat/config" "$HOME/.newsboat/config"
 
 ###########
 # Latexmk #
 ###########
-ln -sf "$HOME/.dotfiles/latex/.latexmkrc" "$HOME/.latexmkrc"
+ln -sf "$DOTFILES/latex/.latexmkrc" "$HOME/.latexmkrc"
