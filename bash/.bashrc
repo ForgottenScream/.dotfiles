@@ -33,4 +33,15 @@ then
     exec startx &>/dev/null
 fi
 
+
+echo
+system_summary() {
+  echo "--------------------------------"
+  echo " Uptime:  $(uptime -p)"
+  df -h / | awk 'NR==2 {print " Root FS: " $3 "/" $2 " used (" $5 ")"}'
+  free -h | awk '/Mem:/ {print " RAM:     " $3 " / " $2}'
+  echo "--------------------------------"
+}
+system_summary
+
 xrdb -merge ~/.Xresources
