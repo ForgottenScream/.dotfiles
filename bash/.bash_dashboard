@@ -1,0 +1,19 @@
+# .bash_dashboard
+
+echo
+system_summary() {
+  echo "--------------------------------"
+  echo " Uptime:  $(uptime -p)"
+  df -h / | awk 'NR==2 {print " Root FS: " $3 "/" $2 " used (" $5 ")"}'
+  free -h | awk '/Mem:/ {print " RAM:     " $3 " / " $2}'
+  echo "--------------------------------"
+}
+system_summary
+
+running_vms=$(qvm-ls --running --raw-list 2>/dev/null)
+
+if [ -n "$running_vms" ]; then
+    echo "Running Qubes VMs:"
+    echo "$running_vms" | sed 's/^/  - /'
+    echo
+fi

@@ -35,6 +35,8 @@ rm -rf "$HOME/.bash_prompt"
 ln -sf "$DOTFILES/bash/.bash_prompt" "$HOME/.bash_prompt"
 rm -rf "$HOME/.bash_profile"
 ln -sf "$DOTFILES/bash/.bash_profile"
+rm -rf "$HOME/.bash_dashboard"
+ln -sf "$DOTFILES/bash/.bash_dashboard" "$HOME/.bash_dashboard"
 
 #######
 # ZSH #
