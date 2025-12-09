@@ -1,21 +1,10 @@
-# Function to display the current time and date
-current_time() {
-  echo -n "$(date +'%Y-%m-%d %H:%M:%S')"
-}
+# Blank line before each prompt
 
-# Update prompt dynamically based on current directory
-update_prompt() {
-  local dir
-  dir=$(pwd)
-  
-  # Formatting the path
-  if [[ "$dir" == "$HOME"* ]]; then
-    dir="~${dir#$HOME}"  # Replace the home directory with '~'
-  fi
-  
-  PS1="%F{white}${dir}%f %B%F{blue}>%f%b "  # Primary prompt
-  RPROMPT="%F{cyan}$(current_time)%f"  # Right-side prompt with time
-}
+PROMPT_COMMAND='echo'
 
-# Hook to update the prompt before each command
-PROMPT_COMMAND=update_prompt
+# Colors
+CYAN="\[\e[36m\]"
+RESET="\[\e[0m\]"
+
+# Prompt definition
+PS1='\w '"$CYAN"'> '"$RESET"
