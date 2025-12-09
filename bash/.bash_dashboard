@@ -10,6 +10,7 @@ system_summary() {
 }
 system_summary
 
+echo
 running_vms=$(qvm-ls --running --raw-list 2>/dev/null)
 
 if [ -n "$running_vms" ]; then

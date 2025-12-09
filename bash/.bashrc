@@ -25,6 +25,13 @@ if [ -f "$HOME/.bash_prompt" ]; then
     source "$HOME/.bash_prompt"
 fi
 
+# Load custom dashbord
+if [ -f "$HOME/.bash_dashboard" ]; then
+    source "$HOME/.bash_dashboard"
+fi
+
+
+
 # Add any other global settings or configurations here
 
 xrdb -merge ~/.Xresources
