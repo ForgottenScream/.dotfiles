@@ -1,5 +1,10 @@
 # .bashrc
 
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
 # Load custom aliases
 if [ -f "$DOTFILES/bash/.bash_aliases" ]; then
     source "$DOTFILES/bash/.bash_aliases"
@@ -21,3 +26,11 @@ if [ -f "$DOTFILES/bash/.bash_prompt" ]; then
 fi
 
 # Add any other global settings or configurations here
+
+# Autostart i3
+if [ "$(tty)" = "/dev/tty1" ];
+then
+    exec startx &>/dev/null
+fi
+
+xrdb -merge ~/.Xresources

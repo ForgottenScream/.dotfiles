@@ -3,3 +3,9 @@
 export PATH="$(go env GOPATH)/bin:$PATH"
 export PATH="/home/user/Grayjay/:$PATH"
 export PATH="/home/user/.local/bin/:$PATH"
+
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
