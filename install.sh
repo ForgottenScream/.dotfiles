@@ -33,6 +33,8 @@ rm -rf "$HOME/.bash_functions"
 ln -sf "$DOTFILES/.bash_functions" "$HOME/.bash_functions"
 rm -rf "$HOME/.bash_prompt"
 ln -sf "$DOTFILES/bash/.bash_prompt" "$HOME/.bash_prompt"
+rm -rf "$HOME/.bash_profile"
+ln -sf "$DOTFILES/bash/.bash_profile"
 
 #######
 # ZSH #
