@@ -96,7 +96,7 @@ mode "$mode_system" {
 	bindsym Escape mode "default"
 }
 set $mode_system (l)ock, (e)xit, (r)eboot, (s)hutdown
-bindsym $mod+BackSpace mode "$mode_system"
+bindsym $mod+Shift+f mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

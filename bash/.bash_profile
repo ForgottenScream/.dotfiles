@@ -1,5 +1,7 @@
 # .bash_profile
 
+xrdb -merge ~/.dotfiles/X11/.Xresources
+
 # Autostart i3
 if [ "$(tty)" = "/dev/tty1" ];
 then
