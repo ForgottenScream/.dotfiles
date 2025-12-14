@@ -43,15 +43,17 @@ bindsym $mod+Shift+v split v
 bindsym $mod+t fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+Shift+r layout stacking
-bindsym $mod+Shift+w layout tabbed
-bindsym $mod+Shift+f layout toggle split
+bindsym $mod+r layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+f layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
+bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 set $terminal "1: Terminal"
@@ -133,7 +135,6 @@ bindsym $mod+Shift+plus scratchpad show
 bar {
     status_command i3status --config ~/.config/i3/i3status.conf
     position top
-    tray_output none
     colors {
         background $black1
         statusline $white2
@@ -203,7 +204,7 @@ client.urgent $red1 $red1 $white2 $red1 $red1
 client.placeholder #000000 #0c0c0c $white2 #000000 #0c0c0c
 
 # Font
-font pango:Inconsolata Nerd Font 16 
+font pango:monospace 18
 
 # Display Wallpaper
 exec_always feh --no-fehbg --bg-fill $HOME/.local/share/backgrounds/backgroundLM8.jpeg
