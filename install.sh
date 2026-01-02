@@ -13,6 +13,7 @@ rm -rf "$XDG_CONFIG_HOME/X11"
 rm -rf "$HOME/.xinitrc"
 ln -s "$DOTFILES/X11/" "$XDG_CONFIG_HOME/X11"
 ln -s "$DOTFILES/X11/.xinitrc" "$HOME/.xinitrc"
+rm -rf "$HOME/.Xresources"
 ln -s "$DOTFILES/X11/.Xresources" "$HOME/.Xresources"
 
 ######
