@@ -1,23 +1,15 @@
 # i3 config file
-
-## Main Functionality
-
-# Basic Definitions
 set $mod Mod4
 
 # i3 Window Manager Settings
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
 # mouse focus
 focus_follows_mouse yes
-
 # back and forth between workspaces
 workspace_auto_back_and_forth yes
-
 # drag using title bar
 tiling_drag modifier titlebar
-
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -55,29 +47,19 @@ bindsym $mod+space focus mode_toggle
 
 bindsym $mod+a focus parent
 
-# Define names for default workspaces for which we configure key bindings later on.
-set $terminal "1: Terminal"
-set $browser "2: Browser"
-set $communication "3: Communication"
-set $code "4: Code"
-set $media "5: Media"
-
-# Define output for workspaces
-workspace "5: Media" output HDMI-1
-
 # switch to workspace
-bindsym $mod+1 workspace $terminal
-bindsym $mod+2 workspace $browser
-bindsym $mod+3 workspace $communication
-bindsym $mod+4 workspace $code
-bindsym $mod+5 workspace $media
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $terminal
-bindsym $mod+Shift+2 move container to workspace $browser
-bindsym $mod+Shift+3 move container to workspace $communication
-bindsym $mod+Shift+4 move container to workspace $code
-bindsym $mod+Shift+5 move container to workspace $media
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -207,16 +189,14 @@ client.placeholder #000000 #0c0c0c $white2 #000000 #0c0c0c
 font pango:monospace 18
 
 # Display Wallpaper
-exec_always feh --no-fehbg --bg-fill $HOME/.local/share/backgrounds/backgroundLM8.jpeg
+exec_always feh --no-fehbg --bg-fill $HOME/.local/share/backgrounds/background.jpeg
 
 ## Applications
 
 # Important stuff
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id togglekb
 exec --no-startup-id xsetroot -cursor_name left_ptr
-exec --no-startup-id redshift -O 4500
 exec --no-startup-id flameshot
 
 # Brightness
@@ -233,11 +213,10 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Autostart Applications
 exec --no-startup-id dunst
 exec --no-startup-id picom
-exec --no-startup-id env CM_MAX_CLIPS=50 clipmenud
 
 # Assign applications to workspaces
-assign [class="Mullvad Browser"] workspace $browser
-assign [class="Signal"] workspace $communication
+assign [class="Mullvad Browser"] workspace 2
+assign [class="Signal"] workspace 3
 
 # Switch to workspace when specific application is opened / other things
 for_window [window_role="pop-up"] floating enable
@@ -245,8 +224,6 @@ for_window [window_role="task_dialog"] floating enable
 
 # Keyboard Shortcuts
 bindsym $mod+Shift+S exec flameshot gui
-bindsym $mod+v exec clipmenu
 bindsym $mod+s exec signal-desktop
-bindsym $mod+f exec firefox
-bindsym $mod+m exec $HOME/mullvad-browser/Browser/start-mullvad-browser
+bindsym $mod+m exec $HOME/.mullvad-browser/Browser/start-mullvad-browser
 bindsym $mod+d exec --no-startup-id dmenu_run
