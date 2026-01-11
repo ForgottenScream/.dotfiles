@@ -34,4 +34,4 @@ BATTERY=$(awk -F= '/^POWER_SUPPLY_CAPACITY=/ {print $2 "%"}' /sys/class/power_su
 DATETIME=$(date "+%A, %d %B %Y %H:%M:%S")
 
 # Output
-echo "$NET_STATUS | $VPN_STATUS | V:$VOLUME | B:$BATTERY | $DATETIME"
+echo "$NET_STATUS | $VPN_STATUS | B:$BATTERY | $DATETIME"
