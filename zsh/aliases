@@ -18,7 +18,6 @@ alias tool='curl -fsSL https://christitus.com/linux | sh'
 #i3 Based Aliases
 alias i3config='nvim "$DOTFILES/i3/config"'
 alias i3status='nvim "$DOTFILES/i3/i3status.conf"'
-alias kb='setxkbmap -layout gb,gb -variant colemak, -option grp:alt_shift_toggle'
 
 #Music File Manipulation Aliases
 alias removepicflac='metaflac --remove --block-type=PICTURE,PADDING --dont-use-padding'
@@ -26,3 +25,5 @@ alias removepicmp3='eyeD3 --remove-all-images'
 
 #ZSH Aliases
 alias n='nvim'
+alias pt='setxkbmap pt'
+alias cm='setxkbmap gb -variant colemak'
