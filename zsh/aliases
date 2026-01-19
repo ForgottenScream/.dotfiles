@@ -1,5 +1,5 @@
 #Arch Based Aliases
-alias update='sudo pacman -Syu --noconfirm && pikaur -Syu'
+alias update='sudo pacman -Syu --noconfirm && yay -Syu'
 alias clean='sudo pacman -Rns $(pacman -Qtdq) && sudo pacman -Scc && yay -Yc'
 alias sps='sudo pacman -S --needed --noconfirm'
 alias spss='sudo pacman -Ss'
