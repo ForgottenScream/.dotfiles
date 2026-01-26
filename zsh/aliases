@@ -24,6 +24,8 @@ alias removepicflac='metaflac --remove --block-type=PICTURE,PADDING --dont-use-p
 alias removepicmp3='eyeD3 --remove-all-images'
 
 #ZSH Aliases
+alias gpt='ollama run llama3-lean'
 alias n='nvim'
 alias pt='setxkbmap pt'
 alias cm='setxkbmap gb -variant colemak'
+alias aliases='nvim $DOTFILES/zsh/aliases'

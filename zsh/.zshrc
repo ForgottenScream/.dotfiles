@@ -7,6 +7,13 @@ export EDITOR=nvim
 setopt AUTO_PARAM_SLASH
 unsetopt CASE_GLOB
 
+unset HISTFILE
+HISTSIZE=0
+SAVEHIST=0
+setopt NO_HIST_BEEP
+setopt NO_HIST_VERIFY
+disable history
+
 autoload -Uz compinit; compinit
 
 #Autocomplete hidden files
