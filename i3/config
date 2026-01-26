@@ -74,7 +74,7 @@ bindsym $mod+Shift+p restart
 ###################################################################################
 #set shut down, restart and locking features
 mode "$mode_system" {
-	bindsym l exec --no-startup-id ~/.config/i3/scripts/lock.sh, mode "default"
+	bindsym l exec --no-startup-id i3lock --image ~/.local/share/backgrounds/windows_xp_lockscreen.png --no-unlock-indicator --pointer win, mode "default"
 	bindsym e exec --no-startup-id i3-msg exit, mode "default"
 	bindsym r exec --no-startup-id systemctl reboot, mode "default"
 	bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"
