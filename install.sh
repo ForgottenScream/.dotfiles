@@ -75,6 +75,16 @@ mkdir -p "$HOME/.newsboat"
 ln -sf "$HOME/.dotfiles/newsboat/urls" "$HOME/.newsboat/urls"
 ln -sf "$HOME/.dotfiles/newsboat/config" "$HOME/.newsboat/config"
 
+#######
+# w3m #
+#######
+rm -rf "$HOME/.w3m"
+mkdir -p "$HOME/.w3m"
+ln -sf "$HOME/.dotfiles/w3m/config" "$HOME/.w3m/config"
+ln -sf "$HOME/.dotfiles/w3m/keymap" "$HOME/.w3m/keymap"
+ln -sf "$HOME/.dotfiles/w3m/menu" "$HOME/.w3m/menu"
+ln -sf "$HOME/.dotfiles/w3m/bookmark.html" "$HOME/.w3m/bookmark.html"
+
 ###########
 # Latexmk #
 ###########
