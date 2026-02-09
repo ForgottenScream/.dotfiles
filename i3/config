@@ -133,6 +133,7 @@ exec_always feh --no-fehbg --bg-fill $HOME/.local/share/backgrounds/background.j
 
 # Autostart
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+exec --no-startup-id redshift -PO 5000
 exec --no-startup-id picom
 exec --no-startup-id dunst
 exec --no-startup-id dex --autostart --environment i3
