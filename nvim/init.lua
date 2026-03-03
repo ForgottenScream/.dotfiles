@@ -1,2 +1,1 @@
 require("forgottenscream")
-require("forgottenscream")

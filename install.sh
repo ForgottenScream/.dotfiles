@@ -1,91 +1,104 @@
-# This script will create the symbolic links between the dotfiles in this directory and the locations where they are meant to be in.
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DOTFILES="$HOME/.dotfiles"
+
+link() {
+  local source="$1"
+  local target="$2"
+
+  echo "Linking $target → $source"
+
+  if [ -e "$target" ] || [ -L "$target" ]; then
+    rm -rf "$target"
+  fi
+
+  mkdir -p "$(dirname "$target")"
+  ln -s "$source" "$target"
+}
+
+echo "Starting dotfiles installation..."
 
 ########
 # nvim #
 ########
-rm -rf "$HOME/.config/nvim"
-ln -sf "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
+link "$DOTFILES/nvim" "$HOME/.config/nvim"
 
 #######
 # X11 #
 #######
-rm -rf "$HOME/.config/X11"
-rm -rf "$HOME/.xinitrc"
-ln -s "$HOME/.dotfiles/X11/" "$HOME/.config/X11"
-ln -s "$HOME/.dotfiles/X11/.xinitrc" "$HOME/.xinitrc"
-rm -rf "$HOME/.Xresources"
-ln -s "$HOME/.dotfiles/X11/.Xresources" "$HOME/.Xresources"
+link "$DOTFILES/X11" "$HOME/.config/X11"
+link "$DOTFILES/X11/.xinitrc" "$HOME/.xinitrc"
+link "$DOTFILES/X11/.Xresources" "$HOME/.Xresources"
 
 ######
 # i3 #
 ######
-rm -rf "$HOME/.config/i3"
-ln -s "$HOME/.dotfiles/i3" "$HOME/.config/i3"
+link "$DOTFILES/i3" "$HOME/.config/i3"
 
 ########
 # Bash #
 ########
-rm -rf "$HOME/.bashrc"
-ln -sf "$HOME/.dotfiles/bash/.bashrc" "$HOME/.bashrc"
-rm -rf "$HOME/.bash_aliases"
-ln -sf "$HOME/.dotfiles/bash/.bash_aliases" "$HOME/.bash_aliases"
-rm -rf "$HOME/.bash_paths"
-ln -sf "$HOME/.dotfiles/bash/.bash_paths" "$HOME/.bash_paths"
-rm -rf "$HOME/.bash_functions"
-ln -sf "$HOME/.dotfiles/bash/.bash_functions" "$HOME/.bash_functions"
-rm -rf "$HOME/.bash_prompt"
-ln -sf "$HOME/.dotfiles/bash/.bash_prompt" "$HOME/.bash_prompt"
-rm -rf "$HOME/.bash_profile"
-ln -sf "$HOME/.dotfiles/bash/.bash_profile" "$HOME/.bash_profile"
-rm -rf "$HOME/.bash_dashboard"
-ln -sf "$HOME/.dotfiles/bash/.bash_dashboard" "$HOME/.bash_dashboard"
+link "$DOTFILES/bash/.bashrc" "$HOME/.bashrc"
+link "$DOTFILES/bash/.bash_aliases" "$HOME/.bash_aliases"
+link "$DOTFILES/bash/.bash_paths" "$HOME/.bash_paths"
+link "$DOTFILES/bash/.bash_functions" "$HOME/.bash_functions"
+link "$DOTFILES/bash/.bash_prompt" "$HOME/.bash_prompt"
+link "$DOTFILES/bash/.bash_profile" "$HOME/.bash_profile"
+link "$DOTFILES/bash/.bash_dashboard" "$HOME/.bash_dashboard"
 
 #######
 # ZSH #
 #######
-rm -rf "$HOME/.config/zsh"
-ln -sf "$HOME/.dotfiles/zsh" "$HOME/.config/zsh"
-ln -sf "$HOME/.dotfiles/zsh/.zshrc" "$HOME/.zshrc"
-ln -sf "$HOME/.dotfiles/zsh/.zshenv" "$HOME/.zshenv"
-ln -sf "$HOME/.dotfiles/zsh/.path" "$HOME/.path"
+link "$DOTFILES/zsh" "$HOME/.config/zsh"
+link "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
+link "$DOTFILES/zsh/.zshenv" "$HOME/.zshenv"
+link "$DOTFILES/zsh/.path" "$HOME/.path"
 
 ########
 # TMUX #
 ########
-rm -rf "$HOME/.config/tmux"
-ln -sf "$HOME/.dotfiles/tmux" "$HOME/.config/tmux"
+link "$DOTFILES/tmux" "$HOME/.config/tmux"
 
 #########
 # Picom #
 #########
-rm -rf "$HOME/.config/picom"
-ln -sf "$HOME/.dotfiles/picom" "$HOME/.config/picom"
+link "$DOTFILES/picom" "$HOME/.config/picom"
 
 #########
 # dunst #
 #########
-rm -rf "$HOME/.config/dunst"
-ln -sf "$HOME/.dotfiles/dunst" "$HOME/.config/dunst"
+link "$DOTFILES/dunst" "$HOME/.config/dunst"
 
 ############
 # Newsboat #
 ############
-rm -rf "$HOME/.newsboat"
 mkdir -p "$HOME/.newsboat"
-ln -sf "$HOME/.dotfiles/newsboat/urls" "$HOME/.newsboat/urls"
-ln -sf "$HOME/.dotfiles/newsboat/config" "$HOME/.newsboat/config"
+link "$DOTFILES/newsboat/urls" "$HOME/.newsboat/urls"
+link "$DOTFILES/newsboat/config" "$HOME/.newsboat/config"
 
 #######
 # w3m #
 #######
-rm -rf "$HOME/.w3m"
 mkdir -p "$HOME/.w3m"
-ln -sf "$HOME/.dotfiles/w3m/config" "$HOME/.w3m/config"
-ln -sf "$HOME/.dotfiles/w3m/keymap" "$HOME/.w3m/keymap"
-ln -sf "$HOME/.dotfiles/w3m/menu" "$HOME/.w3m/menu"
-ln -sf "$HOME/.dotfiles/w3m/bookmark.html" "$HOME/.w3m/bookmark.html"
+link "$DOTFILES/w3m/config" "$HOME/.w3m/config"
+link "$DOTFILES/w3m/keymap" "$HOME/.w3m/keymap"
+link "$DOTFILES/w3m/menu" "$HOME/.w3m/menu"
+link "$DOTFILES/w3m/bookmark.html" "$HOME/.w3m/bookmark.html"
 
 ###########
 # Latexmk #
 ###########
-ln -sf "$HOME/.dotfiles/latex/.latexmkrc" "$HOME/.latexmkrc"
+link "$DOTFILES/latex/.latexmkrc" "$HOME/.latexmkrc"
+
+echo "Setting up Neovim plugins..."
+
+if command -v nvim >/dev/null 2>&1; then
+  bash "$DOTFILES/nvim/lsp-install.sh"
+  bash "$DOTFILES/nvim/plugins-install.sh"
+else
+  echo "Neovim not installed. Skipping nvim setup."
+fi
+
+echo "Dotfiles installation complete."

@@ -1,2 +1,4 @@
 require("forgottenscream.core")
-require("forgottenscream.lazy")
+require("forgottenscream.lsp")
+require("forgottenscream.plugins")
+

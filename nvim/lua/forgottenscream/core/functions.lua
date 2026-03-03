@@ -4,7 +4,7 @@ local M = {}
 function M.CreateLatex()
 	local bufname = vim.fn.expand("%:t")
 	local file_ext = vim.fn.expand("%:e")
-    local file_name = vim.fn.expand("%:t:r")
+	local file_name = vim.fn.expand("%:t:r")
 
 	if file_ext ~= "tex" or file_name == "" then
 		print("Current buffer is not a .tex file.")
@@ -15,22 +15,22 @@ function M.CreateLatex()
 		print("latexmk is not installed. Please install it.")
 		return
 	end
-	
+
 	if vim.fn.system("command -v zathura") == "" then
 		print("Zathura is not installed. Please install it.")
 		return
 	end
 
+	if file_name == "" then
+		print("No .tex file found in the current directory.")
+		return
+	end
 
-    if file_name == "" then
-        print("No .tex file found in the current directory.")
-        return
-    end
-
-    -- Create Makefile if it doesn't exist
-    local makefile_path = "./Makefile"
-    if vim.fn.filereadable(makefile_path) == 0 then
-        local makefile_content = string.format([[
+	-- Create Makefile if it doesn't exist
+	local makefile_path = "./Makefile"
+	if vim.fn.filereadable(makefile_path) == 0 then
+		local makefile_content = string.format(
+			[[
 FILE ?= %s
 TEX := $(FILE).tex
 PDF := $(FILE).pdf
@@ -46,13 +46,16 @@ watch-silent: $(PDF)
 
 clean:
 	$(LATEX) -c
-]], file_name)
+]],
+			file_name
+		)
 
-        local file = io.open(makefile_path, "w")
-        file:write(makefile_content)
-        file:close()
-    end
+		local file = io.open(makefile_path, "w")
+		file:write(makefile_content)
+		file:close()
+	end
 	print("Makefile created for " .. file_name)
 end
 
 return M
+

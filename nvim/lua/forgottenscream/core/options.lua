@@ -24,7 +24,10 @@ opt.autowrite = true
 -- Visual Settings
 opt.termguicolors = true
 opt.background = "dark"
+
 opt.colorcolumn = "80"
+opt.textwidth = 80
+
 opt.signcolumn = "yes"
 opt.showmatch = true
 opt.matchtime = 2
@@ -55,11 +58,11 @@ opt.splitbelow = true
 opt.splitright = true
 
 -- :Explorer
-vim.g.netrw_banner = 0 -- Remove the annoying banner
-vim.g.netrw_liststyle = 3 -- Tree-style view (1=long, 2=short, 3=tree)
+vim.g.netrw_banner = 0       -- Remove the annoying banner
+vim.g.netrw_liststyle = 3    -- Tree-style view (1=long, 2=short, 3=tree)
 vim.g.netrw_browse_split = 4 -- Open files in previous window
-vim.g.netrw_altv = 1 -- When splitting vertically, open on left
-vim.g.netrw_winsize = 25 -- Set default size of explorer window
+vim.g.netrw_altv = 1         -- When splitting vertically, open on left
+vim.g.netrw_winsize = 25     -- Set default size of explorer window
 
 -- Basic autocommands
 local augroup = vim.api.nvim_create_augroup("UserConfig", {})
