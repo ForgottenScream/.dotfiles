@@ -7,17 +7,7 @@ local map = vim.keymap.set
 -- =====================================================================
 -- Core / config
 -- =====================================================================
-map("n", "<leader>rc", ":source $MYVIMRC<CR>", { desc = "Reload config" })
-map("n", "<leader>ch", ":nohl<CR>", { desc = "Clear highlights" })
-
 map("i", "tn", "<Esc>", { noremap = true, silent = true })
-map("i", "<Esc>", "<Nop>", { noremap = true, silent = true })
-
--- Move lines up/down
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
 -- =====================================================================
 -- Files / explorer
@@ -32,21 +22,6 @@ map("n", "<leader>e", function()
 	end
 	vim.cmd("Lexplore")
 end, { desc = "Toggle file explorer" })
-
--- =====================================================================
--- Windows / tabs
--- =====================================================================
-map("n", "<leader>sv", "<C-w>v", { desc = "Split vertical" })
-map("n", "<leader>sh", "<C-w>s", { desc = "Split horizontal" })
-map("n", "<leader>se", "<C-w>=", { desc = "Equalize splits" })
-map("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close split" })
-map("n", "<leader>sl", "<C-w>l", { desc = "To right split" })
-
-map("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "New tab" })
-map("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close tab" })
-map("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Next tab" })
-map("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Prev tab" })
-map("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Buffer in new tab" })
 
 -- =====================================================================
 -- LaTeX
