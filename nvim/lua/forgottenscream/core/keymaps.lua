@@ -49,13 +49,6 @@ map("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Prev tab" })
 map("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Buffer in new tab" })
 
 -- =====================================================================
--- Terminal
--- =====================================================================
-map("n", "<leader>tt", ":terminal<CR>", { desc = "Terminal" })
-map("n", "<leader>tv", ":vsplit | terminal<CR>", { desc = "Terminal (vert)" })
-map("n", "<leader>th", ":split | terminal<CR>", { desc = "Terminal (horiz)" })
-
--- =====================================================================
 -- LaTeX
 -- =====================================================================
 map(
