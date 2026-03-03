@@ -95,8 +95,8 @@ link "$DOTFILES/latex/.latexmkrc" "$HOME/.latexmkrc"
 echo "Setting up Neovim plugins..."
 
 if command -v nvim >/dev/null 2>&1; then
-  bash "$DOTFILES/nvim/lsp-install.sh"
-  bash "$DOTFILES/nvim/plugins-install.sh"
+  bash "$DOTFILES/nvim/install-scripts/lsp-install.sh"
+  bash "$DOTFILES/nvim/install-scripts/plugins-install.sh"
 else
   echo "Neovim not installed. Skipping nvim setup."
 fi
