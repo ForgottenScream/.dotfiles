@@ -20,6 +20,11 @@ link() {
 
 echo "Starting dotfiles installation..."
 
+#######
+# git #
+#######
+link "$DOTFILES/.gitconfig" "$HOME/.gitconfig"
+
 ########
 # nvim #
 ########

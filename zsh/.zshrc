@@ -24,7 +24,7 @@ fpath=($ZDOTDIR/external $fpath)
 autoload -Uz prompt_purification_setup && prompt_purification_setup
 
 if [ $(command -v "fzf") ]; then
-    source /usr/share/fzf/shell/key-bindings.zsh
+    source /usr/share/fzf/key-bindings.zsh
 fi
 
 # Auto start i3
