@@ -1,2 +1,3 @@
-https://feeds.bbci.co.uk/news/rss.xml
-https://sideofburritos.com/blog/index.xml
+https://feeds.bbci.co.uk/news/rss.xml news "BBC News"
+https://sideofburritos.com/blog/index.xml news "SideofBurritos"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCij1VEjDb88RCbqsvZ1gqaw youtube "privacy"

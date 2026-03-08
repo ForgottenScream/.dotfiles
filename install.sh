@@ -79,9 +79,9 @@ link "$DOTFILES/dunst" "$HOME/.config/dunst"
 ############
 # Newsboat #
 ############
-mkdir -p "$HOME/.newsboat"
-link "$DOTFILES/newsboat/urls" "$HOME/.newsboat/urls"
-link "$DOTFILES/newsboat/config" "$HOME/.newsboat/config"
+mkdir -p "$HOME/.config/newsboat"
+link "$DOTFILES/newsboat/urls" "$HOME/.config/newsboat/urls"
+link "$DOTFILES/newsboat/config" "$HOME/.config/newsboat/config"
 
 #######
 # w3m #
