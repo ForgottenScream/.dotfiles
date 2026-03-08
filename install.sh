@@ -23,7 +23,7 @@ echo "Starting dotfiles installation..."
 #######
 # git #
 #######
-link "$DOTFILES/.gitconfig" "$HOME/.gitconfig"
+link "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
 
 ########
 # nvim #
