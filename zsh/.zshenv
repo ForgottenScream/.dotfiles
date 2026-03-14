@@ -1,28 +1,25 @@
 #!/usr/bin/env zsh
+# ~/.zshenv
 
-# For dotfiles
+# XDG Base Directories
 export XDG_CONFIG_HOME="$HOME/.config"
-
-# For specific data
 export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
-
-# For cached files
 export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
-
-export EDITOR="nvim"
-export VISUAL="nvim"
-
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export DOTFILES="$XDG_CONFIG_HOME/dotfiles"
 
-# History filepath
-export HISTFILE="$ZDOTDIR/.zhistory"
-# Maximum events for internal history
-export HISTSIZE=10000
-# Maximum events in history file
-export SAVEHIST=10000
+# Editors
+export EDITOR="nvim"
+export VISUAL="$EDITOR"
 
-export DOTFILES="$HOME/.dotfiles"
+# Paths
+export PATH="$(go env GOPATH)/bin:$PATH"
+export PATH="$HOME/Grayjay:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
-# Assigning ripgrep as default
+# Fzf
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
