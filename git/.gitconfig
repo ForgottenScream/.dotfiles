@@ -36,6 +36,7 @@
     --preview='git show --color=always {1}' \
     --preview-window=right:60%:wrap | \
     awk '{print $1}'"
+  s = status --short
 
 [branch]
 	sort = -committerdate
