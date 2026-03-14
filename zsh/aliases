@@ -12,7 +12,6 @@ alias shred='shred -vfzu'
 
 # i3 Based Aliases
 alias i3config="nvim $DOTFILES/i3/config"
-alias i3status="nvim $DOTFILES/i3/i3status.conf"
 
 # ZSH Aliases
 alias aliases="nvim $ZDOTDIR/aliases"

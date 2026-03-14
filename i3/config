@@ -82,6 +82,7 @@ mode "$mode_system" {
 	#to exit system mode use 'Enter' or 'Escape'
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
+  bindsym q mode "default"
 }
 
 set $mode_system (l)ock, (e)xit, (r)eboot, (s)hutdown
@@ -105,6 +106,7 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+p mode "default"
+        bindsym q mode "default"
 }
 
 bindsym $mod+p mode "resize"
