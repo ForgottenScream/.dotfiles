@@ -6,7 +6,7 @@ alias spss='sudo pacman -Ss'
 alias spr='sudo pacman -Rns --noconfirm'
 
 # General Terminal Aliases
-alias l='ls --color=auto -lah'
+alias l='ls -lathir --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias shred='shred -vfzu'
 

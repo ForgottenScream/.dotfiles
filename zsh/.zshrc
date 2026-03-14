@@ -10,13 +10,13 @@ SAVEHIST=0
 setopt NO_HIST_BEEP
 setopt NO_HIST_VERIFY
 
-# --- Completion ---
 autoload -Uz compinit; compinit
-_comp_options+=(globdots)
 
-# --- Prompt ---
+#Autocomplete hidden files
+_comp_options+=(globdots)
+source $XDG_CONFIG_HOME/zsh/external/completion.zsh
+
 fpath=("$ZDOTDIR/external" $fpath)
-autoload -Uz promptinit; promptinit
 autoload -Uz prompt_purification_setup && prompt_purification_setup
 
 # --- Aliases ---
