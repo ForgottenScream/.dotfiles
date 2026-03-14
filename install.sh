@@ -76,18 +76,12 @@ link "$DOTFILES/dunst" "$HOME/.config/dunst"
 ############
 # Newsboat #
 ############
-mkdir -p "$HOME/.config/newsboat"
-link "$DOTFILES/newsboat/urls" "$HOME/.config/newsboat/urls"
-link "$DOTFILES/newsboat/config" "$HOME/.config/newsboat/config"
+link "$DOTFILES/newsboat" "$HOME/.config/newsboat"
 
 #######
 # w3m #
 #######
-mkdir -p "$HOME/.w3m"
-link "$DOTFILES/w3m/config" "$HOME/.w3m/config"
-link "$DOTFILES/w3m/keymap" "$HOME/.w3m/keymap"
-link "$DOTFILES/w3m/menu" "$HOME/.w3m/menu"
-link "$DOTFILES/w3m/bookmark.html" "$HOME/.w3m/bookmark.html"
+link "$DOTFILES/w3m" "$HOME/.w3m"
 
 ###########
 # Latexmk #
