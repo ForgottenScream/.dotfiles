@@ -57,6 +57,8 @@ link "$DOTFILES/bash/.bash_dashboard" "$HOME/.bash_dashboard"
 # ZSH #
 #######
 link "$DOTFILES/zsh" "$HOME/.config/zsh"
+link "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
+link "$DOTFILES/zsh/.zshenv" "$HOME/.zshenv"
 
 ########
 # TMUX #

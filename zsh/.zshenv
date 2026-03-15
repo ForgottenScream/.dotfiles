@@ -14,11 +14,7 @@ export VISUAL="$EDITOR"
 
 # Paths
 export PATH="$(go env GOPATH)/bin:$PATH"
-export PATH="$HOME/Grayjay:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
 # Fzf
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
