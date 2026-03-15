@@ -11,6 +11,7 @@ opt.backspace = "indent,eol,start"
 opt.clipboard:append("unnamedplus")
 
 -- File Handling
+vim.cmd("filetype plugin indent on")
 opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
@@ -58,38 +59,38 @@ opt.splitbelow = true
 opt.splitright = true
 
 -- :Explorer
-vim.g.netrw_banner = 0       -- Remove the annoying banner
-vim.g.netrw_liststyle = 3    -- Tree-style view (1=long, 2=short, 3=tree)
-vim.g.netrw_browse_split = 4 -- Open files in previous window
-vim.g.netrw_altv = 1         -- When splitting vertically, open on left
-vim.g.netrw_winsize = 25     -- Set default size of explorer window
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+vim.g.netrw_browse_split = 0
+vim.g.netrw_altv = 1
+vim.g.netrw_winsize = 25
 
 -- Basic autocommands
 local augroup = vim.api.nvim_create_augroup("UserConfig", {})
 
 -- Spelling Off for Terminal
 vim.api.nvim_create_autocmd({ "TermOpen" }, {
-  group = augroup,
-  pattern = "*",
-  command = "setlocal nospell",
+	group = augroup,
+	pattern = "*",
+	command = "setlocal nospell",
 })
 
 -- Auto-close terminal when process exits
 vim.api.nvim_create_autocmd("TermClose", {
-  group = augroup,
-  callback = function()
-    if vim.v.event.status == 0 then
-      vim.api.nvim_buf_delete(0, {})
-    end
-  end,
+	group = augroup,
+	callback = function()
+		if vim.v.event.status == 0 then
+			vim.api.nvim_buf_delete(0, {})
+		end
+	end,
 })
 
 -- Auto-resize splits when window is resized
 vim.api.nvim_create_autocmd("VimResized", {
-  group = augroup,
-  callback = function()
-    vim.cmd("tabdo wincmd =")
-  end,
+	group = augroup,
+	callback = function()
+		vim.cmd("tabdo wincmd =")
+	end,
 })
 
 -- =====================
@@ -97,3 +98,4 @@ vim.api.nvim_create_autocmd("VimResized", {
 -- =====================
 opt.showtabline = 1
 opt.tabline = ""
+
