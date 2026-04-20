@@ -2,7 +2,7 @@ local opt = vim.opt
 
 -- Basic Definitions
 opt.number = true
-opt.relativenumber = true
+opt.relativenumber = false 
 opt.cursorline = true
 opt.wrap = false
 opt.scrolloff = 10
