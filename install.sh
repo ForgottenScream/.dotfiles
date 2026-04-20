@@ -90,13 +90,17 @@ link "$DOTFILES/w3m" "$HOME/.w3m"
 ###########
 link "$DOTFILES/latex/.latexmkrc" "$HOME/.latexmkrc"
 
-echo "Setting up Neovim plugins..."
+echo "Setting up Neovim"
 
-if command -v nvim >/dev/null 2>&1; then
+if [ -x "$HOME/.local/bin/nvim" ]; then
+  echo "Running Neovim install scripts..."
   bash "$DOTFILES/nvim/install-scripts/lsp-install.sh"
   bash "$DOTFILES/nvim/install-scripts/plugins-install.sh"
 else
-  echo "Neovim not installed. Skipping nvim setup."
+  bash "$DOTFILES/nvim/install-scripts/nvim-install.sh"
+  bash "$DOTFILES/nvim/install-scripts/lsp-install.sh"
+  bash "$DOTFILES/nvim/install-scripts/plugins-install.sh"
+  exit 1
 fi
 
 echo "Dotfiles installation complete."
