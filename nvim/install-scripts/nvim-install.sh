@@ -27,20 +27,38 @@ download() {
   fi
 }
 
+secure_remove() {
+  if detect_cmd shred; then
+    for f in "$@"; do
+      [ -e "$f" ] || continue
+      shred -vfzu "$f" 2>/dev/null || rm -f -- "$f"
+    done
+  else
+    rm -f -- "$@"
+  fi
+}
+
 # --- Main ---
 main() {
   mkdir -p "$INSTALL_DIR"
 
   TMPDIR="$(mktemp -d)"
-  trap 'rm -rf "$TMPDIR"' EXIT
   TMPFILE="$TMPDIR/nvim.tmp"
   ZSYNC_TMP="$TMPDIR/$ZSYNC_FILE"
   PART="$INSTALL_PATH.part"
+
+  trap 'rm -rf "$TMPDIR"; secure_remove "$PART" "$TMPFILE" "$ZSYNC_TMP" "$PART.part" "$INSTALL_PATH.tmp.part" || true' EXIT
 
   if [ ! -f "$INSTALL_PATH" ]; then
     echo "Downloading $APPNAME for the first time..."
     download "$APPURL/$APPNAME" "$TMPFILE"
     install -m 0755 "$TMPFILE" "$INSTALL_PATH"
+    if ! file "$INSTALL_PATH" | grep -qi 'executable'; then
+      rm -f "$INSTALL_PATH"
+      echo "Downloaded file doesn't look like an executable, aborting." >&2
+      exit 1
+    fi
+    secure_remove "$TMPFILE"
     echo "Installed $INSTALL_PATH"
   else
     if detect_cmd zsync; then
@@ -53,8 +71,10 @@ main() {
         if ! file "$INSTALL_PATH" | grep -qi 'executable'; then
           rm -f "$INSTALL_PATH"
           echo "Downloaded file doesn't look like an executable, aborting." >&2
+          secure_remove "$PART" "$ZSYNC_TMP" "$TMPFILE"
           exit 1
         fi
+        secure_remove "$PART" "$ZSYNC_TMP" "$TMPFILE"
         echo "Updated $INSTALL_PATH"
       else
         echo "zsync update failed, falling back to full download..."
@@ -63,10 +83,12 @@ main() {
         if ! file "$INSTALL_PATH" | grep -qi 'executable'; then
           rm -f "$INSTALL_PATH"
           echo "Downloaded file doesn't look like an executable, aborting." >&2
+          secure_remove "$PART" "$ZSYNC_TMP" "$TMPFILE"
           exit 1
         fi
+        secure_remove "$PART" "$ZSYNC_TMP" "$TMPFILE"
+        echo "Updated $INSTALL_PATH (full download)"
       fi
-      rm -f "$ZSYNC_TMP"
     else
       echo "zsync not found, falling back to full download..."
       download "$APPURL/$APPNAME" "$TMPFILE"
@@ -74,8 +96,10 @@ main() {
       if ! file "$INSTALL_PATH" | grep -qi 'executable'; then
         rm -f "$INSTALL_PATH"
         echo "Downloaded file doesn't look like an executable, aborting." >&2
+        secure_remove "$TMPFILE"
         exit 1
       fi
+      secure_remove "$TMPFILE"
     fi
   fi
 
