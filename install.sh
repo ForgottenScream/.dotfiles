@@ -29,6 +29,8 @@ link "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
 # nvim #
 ########
 link "$DOTFILES/nvim" "$HOME/.config/nvim"
+mkdir -p "$HOME/.local/share/nvim/undo"
+mkdir -p "$HOME/.local/share/nvim/swap"
 
 #######
 # X11 #

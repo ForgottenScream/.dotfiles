@@ -1,21 +1,31 @@
 local opt = vim.opt
 
 -- Basic Definitions
+opt.mouse = "a"
 opt.number = true
+opt.numberwidth = 4
 opt.relativenumber = false 
 opt.cursorline = true
 opt.wrap = false
-opt.scrolloff = 10
+opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.backspace = "indent,eol,start"
 opt.clipboard:append("unnamedplus")
+opt.list = true
+opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+opt.wildmenu = true
+opt.wildmode = "longest:full,full"
+opt.wildignore:append({ "node_modules", ".git" })
+opt.showcmd = true
 
 -- File Handling
 vim.cmd("filetype plugin indent on")
 opt.backup = false
 opt.writebackup = false
-opt.swapfile = false
-opt.undofile = false
+opt.swapfile = true
+opt.directory = vim.fn.expand('~/.local/share/nvim/swap//')
+opt.undofile = true 
+opt.undodir= vim.fn.expand('~/.local/share/nvim/undo')
 opt.updatetime = 300
 opt.timeoutlen = 500
 opt.ttimeoutlen = 0
@@ -33,7 +43,7 @@ opt.signcolumn = "yes"
 opt.showmatch = true
 opt.matchtime = 2
 opt.cmdheight = 1
-opt.completeopt = "menuone,noinsert,noselect"
+opt.completeopt = { "menu", "menuone", "noselect" }
 opt.showmode = false
 opt.pumheight = 10
 opt.pumblend = 10
@@ -42,9 +52,9 @@ opt.conceallevel = 0
 opt.winborder = "rounded"
 
 -- Indentation
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.softtabstop = 2
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.softtabstop = 4
 opt.expandtab = true
 opt.smartindent = true
 opt.autoindent = true
@@ -53,6 +63,7 @@ opt.autoindent = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.hlsearch = true
+opt.incsearch = true
 
 -- Split Behavior
 opt.splitbelow = true
