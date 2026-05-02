@@ -28,6 +28,7 @@ install_plugin() {
 # Core Utilities
 # ======================
 
+install_plugin https://github.com/nvim-treesitter/nvim-treesitter.git
 install_plugin https://github.com/windwp/nvim-autopairs.git
 install_plugin https://github.com/kylechui/nvim-surround.git
 install_plugin https://github.com/lewis6991/gitsigns.nvim.git

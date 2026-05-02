@@ -164,6 +164,7 @@ local servers = {
         lineLength = 80,
       },
     },
+    hls = {},
   },
 }
 
