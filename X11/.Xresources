@@ -84,18 +84,18 @@ XTerm*cursorColor: green
 UXTerm*cursorColor: green
 URxvt*cursorColor: green
 
-XTerm*cursorBlink: true
-UXTerm*cursorBlink: true
-URxvt*cursorBlink: true
+XTerm*cursorBlink: false
+UXTerm*cursorBlink: false
+URxvt*cursorBlink: false
 
 ! Set the scrollbar
 XTerm*scrollBar: false 
 UXTerm*scrollBar: false 
 URxvt*scrollBar:false
 
-XTerm*scrollTtyOutput: true
-UXTerm*scrollTtyOutput: true
-URxvt*scrollTtyOutput: true
+XTerm*scrollTtyOutput: false
+UXTerm*scrollTtyOutput: false
+URxvt*scrollTtyOutput: false
 
 ! Set the title
 XTerm*title: Terminal 
