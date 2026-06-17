@@ -66,7 +66,7 @@ main() {
       download "$ZSYNC_URL" "$ZSYNC_TMP"
 
       # try zsync with referer and write to .part file
-      if zsync -u "$ZSYNC_URL" -i "$INSTALL_PATH" "$ZSYNC_TMP" -o "$PART"; then
+      if zsync -i "$INSTALL_PATH" "$ZSYNC_TMP" -o "$PART"; then
         install -m 0755 "$PART" "$INSTALL_PATH"
         if ! file "$INSTALL_PATH" | grep -qi 'executable'; then
           rm -f "$INSTALL_PATH"
