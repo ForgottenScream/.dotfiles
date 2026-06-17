@@ -40,5 +40,6 @@ if command -v tmux &>/dev/null && [[ -z "$TMUX" ]] && [[ "$TERM" != "linux" ]]; 
     tmux attach-session -t default 2>/dev/null || tmux new-session -s default
 fi
 
+eval "$(zoxide init zsh --cmd n)"
 # --- Plugins (must be last) ---
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
