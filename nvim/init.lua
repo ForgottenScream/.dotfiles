@@ -376,6 +376,14 @@ safe_setup("cmp", {
     end
 end)
 
+-- Treesitter setup must be after plugin is loaded by vim.pack
+-- Using pcall to handle case where plugin isn't available yet
+pcall(function()
+  require('nvim-treesitter.configs').setup({
+    ensure_installed = {"lua", "python", "javascript"}, sync_install = false
+  })
+end)
+
 -- =========================================
 -- LSP CONFIGURATION
 -- =========================================
