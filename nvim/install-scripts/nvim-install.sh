@@ -47,7 +47,7 @@ main() {
   ZSYNC_TMP="$TMPDIR/$ZSYNC_FILE"
   PART="$INSTALL_PATH.part"
 
-  trap 'rm -rf "$TMPDIR"; secure_remove "$PART" "$TMPFILE" "$ZSYNC_TMP" "$PART.part" "$INSTALL_PATH.tmp.part" || true' EXIT
+  trap 'rm -rf "$TMPDIR"; secure_remove "$PART" "$TMPFILE" "$ZSYNC_TMP" "$PART.part" "$INSTALL_PATH.part.part" "$INSTALL_PATH.tmp.part" || true' EXIT
 
   if [ ! -f "$INSTALL_PATH" ]; then
     echo "Downloading $APPNAME for the first time..."
@@ -66,7 +66,7 @@ main() {
       download "$ZSYNC_URL" "$ZSYNC_TMP"
 
       # try zsync with referer and write to .part file
-      if zsync -i "$INSTALL_PATH" "$ZSYNC_TMP" -o "$PART"; then
+      if zsync -i "$INSTALL_PATH" -u "$APPURL/" "$ZSYNC_TMP" -o "$PART"; then
         install -m 0755 "$PART" "$INSTALL_PATH"
         if ! file "$INSTALL_PATH" | grep -qi 'executable'; then
           rm -f "$INSTALL_PATH"
