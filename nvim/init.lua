@@ -16,7 +16,7 @@ vim.opt.sidescrolloff = 8
 vim.opt.backspace = "indent,eol,start"
 vim.opt.clipboard:append("unnamedplus")
 vim.opt.list = true
-vim.opt.listchars = { tab = "»", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.wildmenu = true
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wildignore:append({ "node_modules", ".git" })
