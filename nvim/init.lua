@@ -231,7 +231,6 @@ local thm_black = "#1b1d2b"
 local thm_gray = "#3a3f5a"
 local thm_black4 = "#444a73"
 local thm_magenta = "#c099ff"
-local thm_pink = "#ff757f"
 local thm_red = "#ff757f"
 local thm_green = "#c3e88d"
 local thm_yellow = "#ffc777"
@@ -247,7 +246,7 @@ vim.api.nvim_set_hl(0, "StatusLine", { fg = thm_fg, bg = thm_gray })
 vim.api.nvim_set_hl(0, "StatusLineNC", { fg = thm_gray, bg = thm_bg })
 vim.api.nvim_set_hl(0, "Visual", { bg = thm_black4 })
 vim.api.nvim_set_hl(0, "Search", { fg = thm_bg, bg = thm_yellow })
-vim.api.nvim_set_hl(0, "Comment", { fg = thm_pink })
+vim.api.nvim_set_hl(0, "Comment", { fg = thm_red })
 vim.api.nvim_set_hl(0, "String", { fg = thm_green })
 vim.api.nvim_set_hl(0, "Number", { fg = thm_orange })
 vim.api.nvim_set_hl(0, "Function", { fg = thm_blue })
@@ -269,11 +268,16 @@ vim.pack.add({
     { name = "cmp-buffer", src = "https://github.com/hrsh7th/cmp-buffer" },
     { name = "cmp-path", src = "https://github.com/hrsh7th/cmp-path" },
     { name = "nvim-lspconfig", src = "https://github.com/neovim/nvim-lspconfig" },
+    { name = "mason.nvim", src = "https://github.com/mason-org/mason.nvim"},
+    { name = "mason-lspconfig.nvim", src = "https://github.com/mason-org/mason-lspconfig.nvim"}
 })
 
 -- =========================================
 -- PLUGIN SETUP
 -- =========================================
+
+require("mason").setup()
+require("mason-lspconfig").setup{ensure_installed={"lua_ls","pyright","ruff"}}
 
 local function safe_setup(name, opts, after)
     local ok, mod = pcall(require, name)
@@ -480,6 +484,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 vim.lsp.config("lua_ls", {
     capabilities = capabilities,
+    filetypes = {"lua"},
     settings = {
         Lua = {
             runtime = {
@@ -501,11 +506,12 @@ vim.lsp.config("lua_ls", {
 
 vim.lsp.config("pyright", {
     capabilities = capabilities,
+    filetypes = {"python"}
 })
 
-vim.lsp.config("ruff", {
+vim.lsp.config("ruff_lsp", {
     capabilities = capabilities,
-    cmd = { "ruff", "server" },
+    filetypes = {"python"},
     init_options = {
         settings = {
             lineLength = 80,
