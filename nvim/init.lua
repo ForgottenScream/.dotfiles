@@ -504,10 +504,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.tbl_extend("force", opts, { desc = "Line diagnostics" })
     )
     keymap("n", "[d", function()
-      vim.diagnostic.jump({ count = -1, float = true })
+        vim.diagnostic.jump({
+            count = -1,
+            on_jump = function()
+                vim.diagnostic.open_float(nil, { focus = true })
+            end,
+        })
     end, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
+
     keymap("n", "]d", function()
-      vim.diagnostic.jump({ count = 1, float = true })
+        vim.diagnostic.jump({
+            count = 1,
+            on_jump = function()
+                vim.diagnostic.open_float(nil, { focus = true })
+            end,
+        })
     end, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
 
     keymap(
