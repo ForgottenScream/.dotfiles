@@ -7,6 +7,9 @@
 
 echo
 
+# Run calendar first
+cal() { command cal "$@"; }
+
 system_summary() {
   echo "--------------------------------"
   if command -v uptime >/dev/null 2>&1; then

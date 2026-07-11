@@ -2,7 +2,6 @@
 #
 # .bash_functions
 
-cal() { command cal "$@"; }
 
 mkcd() {
     mkdir -p -- "$1" && cd -- "$1"
