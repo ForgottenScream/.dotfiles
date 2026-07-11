@@ -1,19 +1,18 @@
-#!/usr/bin/env bash
-#
-# .bashrc
+# ~/.bashrc
 
 # Load /etc/bashrc
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+  . /etc/bashrc
 fi
 
 # Only run in interactive shells
 [[ -n $PS1 ]] || return
 case $- in
-    *i*) ;;
-    *) return ;;
+  *i*) ;;
+  *) return ;;
 esac
 
+######################################
 # Environment
 export EDITOR='vim'
 export GREP_COLOR='1;36'
@@ -36,40 +35,151 @@ export LESS_TERMCAP_ZV=$(tput rsubm)
 export LESS_TERMCAP_ZO=$(tput ssupm)
 export LESS_TERMCAP_ZW=$(tput rsupm)
 
-# Load custom aliases
-if [ -f "$HOME/.bash_aliases" ]; then
-    source "$HOME/.bash_aliases"
+######################################
+# XDG Base Directories + PATH
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
+export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
+
+case ":$PATH:" in
+  *:"$HOME/.local/bin":*) ;;
+  *) PATH="$HOME/.local/bin:$PATH" ;;
+esac
+
+case ":$PATH:" in
+  *:"$HOME/bin":*) ;;
+  *) PATH="$HOME/bin:$PATH" ;;
+esac
+
+export PATH
+
+
+xrdb -merge ~/.dotfiles/X11/.Xresources
+
+######################################
+# Prompt
+CYAN="\[\e[36m\]"
+RESET="\[\e[0m\]"
+
+PROMPT_COMMAND='[ -n "$PS1" ] && printf "\n"'
+PS1='\w '"$CYAN"'> '"$RESET"
+
+######################################
+# Aliases
+alias l='ls -1t --color=auto --group-directories-first'
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+alias shred='shred -vfzu'
+
+alias aliases='vim ~/.bashrc'
+
+alias tool='
+  if command -v curl >/dev/null 2>&1; then
+    curl -fsSL https://christitus.com/linux | sh
+  else
+    echo "Error: curl not found."
+    return 1
+  fi
+'
+
+# i3 based aliases
+alias i3config='nvim "${DOTFILES:-$HOME/.dotfiles}/i3/config"'
+alias i3status='nvim "${DOTFILES:-$HOME/.dotfiles}/i3/i3status.conf"'
+
+# Music File Manipulation Aliases
+alias removepicflac='metaflac --remove --block-type=PICTURE,PADDING --dont-use-padding'
+alias removepicmp3='eyeD3 --remove-all-images'
+
+# Keyboard Aliases
+alias cm='setxkbmap gb -variant colemak'
+alias pt='setxkbmap pt'
+
+######################################
+# Functions
+
+copytodom0() {
+  local src_vm="$1"
+  local src_path="$2"
+  local dest_path="$3"
+
+  if [[ -z "$src_vm" || -z "$src_path" || -z "$dest_path" ]]; then
+    echo "Usage: copytodom0 <src-vm> <path/in/src-vm> <dest/path/in/dom0>"
+    return 1
+  fi
+
+  if ! command -v qvm-run >/dev/null 2>&1; then
+    echo "Error: qvm-run not found."
+    return 1
+  fi
+
+  qvm-run --pass-io "$src_vm" "cat $(printf '%q' "$src_path")" > "$dest_path"
+}
+
+rootTerminal() {
+  local vm="$1"
+
+  if [[ -z "$vm" ]]; then
+    echo "Usage: rootTerminal <vm>"
+    return 1
+  fi
+
+  if ! command -v qvm-run >/dev/null 2>&1 || ! command -v qubes-run-terminal >/dev/null 2>&1; then
+    echo "Error: Qubes tools not found."
+    return 1
+  fi
+
+  qvm-run -u root "$vm" qubes-run-terminal
+}
+
+######################################
+# Dashboard
+echo
+
+# Run calendar first
+cal
+
+system_summary() {
+  echo "--------------------------------"
+  if command -v uptime >/dev/null 2>&1; then
+    echo " Uptime:  $(uptime -p)"
+  fi
+
+  if command -v df >/dev/null 2>&1 && command -v awk >/dev/null 2>&1; then
+    df -h / | awk 'NR==2 {print " Root FS: " $3 "/" $2 " used (" $5 ")"}'
+  fi
+
+  if command -v free >/dev/null 2>&1 && command -v awk >/dev/null 2>&1; then
+    free -h | awk '/Mem:/ {print " RAM:     " $3 " / " $2}'
+  fi
+
+  echo "--------------------------------"
+}
+
+system_summary
+
+echo
+
+if command -v qvm-ls >/dev/null 2>&1; then
+  running_vms=$(qvm-ls --running --raw-list 2>/dev/null)
+  if [[ -n "$running_vms" ]]; then
+    echo "Running Qubes VMs:"
+    printf '%s\n' "$running_vms" | sed 's/^/  - /'
+    echo
+  fi
 fi
 
-# Load custom paths
-if [ -f "$HOME/.bash_paths" ]; then
-    source "$HOME/.bash_paths"
-fi
-
-# Load custom functions
-if [ -f "$HOME/.bash_functions" ]; then
-    source "$HOME/.bash_functions"
-fi
-
-# Load custom prompt settings
-if [ -f "$HOME/.bash_prompt" ]; then
-    source "$HOME/.bash_prompt"
-fi
-
-# Load custom dashbord
-if [ -f "$HOME/.bash_dashboard" ]; then
-    source "$HOME/.bash_dashboard"
-fi
-
+######################################
 # Completions
 if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-        . /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-        . /etc/bash_completion
-    fi
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
 fi
 
+######################################
+# Bash options
 shopt -s cdspell
 shopt -s checkwinsize
 shopt -s extglob
@@ -78,6 +188,7 @@ shopt -s extglob
 shopt -s autocd 2>/dev/null || true
 shopt -s dirspell 2>/dev/null || true
 
+######################################
 # History
 HISTCONTROL=ignoreboth
 export HISTSIZE=20
