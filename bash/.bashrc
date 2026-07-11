@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#
 # .bashrc
 
 # Source global definitions
@@ -31,7 +33,7 @@ if [ -f "$HOME/.bash_dashboard" ]; then
 fi
 
 
-
 # Add any other global settings or configurations here
-
-xrdb -merge ~/.Xresources
+if command -v xrdb >/dev/null 2>&1; then
+    xrdb -merge ~/.Xresources
+fi

@@ -1,10 +1,13 @@
-# Blank line before each prompt
-
-PROMPT_COMMAND='echo'
+#!/usr/bin/env bash
+#
+# .bash_prompt
 
 # Colors
 CYAN="\[\e[36m\]"
 RESET="\[\e[0m\]"
 
-# Prompt definition
+# Blank line before each interactive prompt
+PROMPT_COMMAND='[ -n "$PS1" ] && printf "\n"'
+
+# Prompt definition (works in xterm and xterm-256color)
 PS1='\w '"$CYAN"'> '"$RESET"
