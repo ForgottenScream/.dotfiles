@@ -15,7 +15,7 @@ esac
 ######################################
 # Environment
 export EDITOR='vim'
-export GREP_COLOR='1;36'
+export GREP_COLORS='m=1;36'
 export PAGER='less'
 export VISUAL='vim'
 export LSCOLORS='ExGxbEaECxxEhEhBaDaCaD'
@@ -54,7 +54,7 @@ esac
 export PATH
 
 
-xrdb -merge ~/.dotfiles/X11/.Xresources
+xrdb -merge ~/.Xresources
 
 ######################################
 # Prompt
