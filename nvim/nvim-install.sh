@@ -11,30 +11,19 @@ TMPDIR="$(mktemp -d)"
 trap 'rm -rf $TMPDIR' EXIT
 cd "$TMPDIR"
 
-# First install
-if [[ ! -f $INSTALL ]]; then
-  echo "Installing Neovim..."
-  download "$URL" nvim
-  chmod +x nvim
-  mv nvim "$INSTALL"
-  echo "Done: $INSTALL"
-  exit
+if [[ -f $INSTALL ]]; then
+    if command -v zsync >/dev/null; then
+        download "${URL}.zsync" nvim.zsync
+        zsync -i "$INSTALL" nvim.zsync
+        mv nvim-linux-x86_64.appimage "$INSTALL"
+        chmod +x "$INSTALL"
+        echo "Done: $INSTALL (zsync)"
+        exit
+    fi
+else
+    echo "Neovim not installed, downloading AppImage"
+    download "$URL" nvim
+    chmod +x nvim
+    mv nvim "$INSTALL"
+    echo "Done: $INSTALL"
 fi
-
-# Update via zsync
-echo "Updating Neovim..."
-if command -v zsync >/dev/null; then
-  download "${URL}.zsync" nvim.zsync
-  zsync -i "$INSTALL" nvim.zsync
-  mv nvim-linux-x86_64.appimage "$INSTALL"
-  chmod +x "$INSTALL"
-  echo "Done: $INSTALL (zsync)"
-  exit
-fi
-
-# Fallback to full download
-echo "zsync not found, full download..."
-download "$URL" nvim
-chmod +x nvim
-mv nvim "$INSTALL"
-echo "Done: $INSTALL"
