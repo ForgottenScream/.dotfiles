@@ -24,7 +24,7 @@ source "$ZDOTDIR/aliases"
 
 # --- Fzf ---
 if command -v fzf &>/dev/null; then
-    source /usr/share/fzf/key-bindings.zsh
+    source /usr/share/fzf/shell/key-bindings.zsh
 fi
 
 # --- X Resources ---
@@ -40,6 +40,10 @@ if command -v tmux &>/dev/null && [[ -z "$TMUX" ]] && [[ "$TERM" != "linux" ]]; 
     tmux attach-session -t default 2>/dev/null || tmux new-session -s default
 fi
 
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
 eval "$(zoxide init zsh --cmd n)"
+
 # --- Plugins (must be last) ---
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
