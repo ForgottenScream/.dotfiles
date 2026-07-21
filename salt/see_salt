@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SALT_DIR="/srv/user_salt"
+
+printf "current salt files:\n\n"
+
+if command -v sudo >/dev/null 2>&1; then
+    sudo ls "$SALT_DIR"
+else
+    ls "$SALT_DIR"
+fi
+
+printf "\n\n"
+printf "Run a state with:\n"
+printf "sudo qubesctl state.sls <name> saltevn=user\n\n"
+
+printf "To run a state that requires installing anything, target the template based off of:\n"
+printf "sudo qubesctl --targets=<template> state.sls <name> saltenv=user\n\n"
+
+printf "For documentation, check:\n"
+printf "/usr/lib/python*/site-packages/salt/states\n"
