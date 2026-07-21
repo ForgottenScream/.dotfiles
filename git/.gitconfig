@@ -1,7 +1,13 @@
 # .gitconfig template with various useful options
 # Template from @micahkepe, will test to see what aligns with my workflow
 
+[user]
+  name = ForgottenScream
+  email = ForgottenScream@protonmail.com
+  signingkey = DB8D62C929A404BD00F6B94835AE39CC59F0828E
+
 [commit]
+  gpgSign = true
   verbose = true
 
 [core]
