@@ -1,4 +1,10 @@
 https://feeds.bbci.co.uk/news/rss.xml news "BBC News"
 https://feeds.feedburner.com/TheHackersNews news "TheHackerNews"
-https://sideofburritos.com/blog/index.xml news "SideofBurritos"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCij1VEjDb88RCbqsvZ1gqaw youtube "privacy"
+
+https://sideofburritos.com/blog/index.xml SideOfBurritos "SOB blog"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCij1VEjDb88RCbqsvZ1gqaw SideOfBurritos "SOB YT"
+
+https://feeds.twit.tv/sn.xml tech "SecurityNow"
+https://feeds.twit.tv/uls.xml tech "UntitledLinuxShow"
+https://feeds.twit.tv/twit.xml tech "ThisWeekInTech"
+https://feeds.twit.tv/tnw.xml tech "TechNewsWeekly"
