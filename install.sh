@@ -48,12 +48,7 @@ link "$DOTFILES/i3" "$HOME/.config/i3"
 # Bash #
 ########
 link "$DOTFILES/bash/.bashrc" "$HOME/.bashrc"
-link "$DOTFILES/bash/.bash_aliases" "$HOME/.bash_aliases"
-link "$DOTFILES/bash/.bash_paths" "$HOME/.bash_paths"
-link "$DOTFILES/bash/.bash_functions" "$HOME/.bash_functions"
-link "$DOTFILES/bash/.bash_prompt" "$HOME/.bash_prompt"
 link "$DOTFILES/bash/.bash_profile" "$HOME/.bash_profile"
-link "$DOTFILES/bash/.bash_dashboard" "$HOME/.bash_dashboard"
 
 #######
 # ZSH #
@@ -86,23 +81,5 @@ link "$DOTFILES/newsboat" "$HOME/.config/newsboat"
 # w3m #
 #######
 link "$DOTFILES/w3m" "$HOME/.w3m"
-
-###########
-# Latexmk #
-###########
-link "$DOTFILES/latex/.latexmkrc" "$HOME/.latexmkrc"
-
-echo "Setting up Neovim"
-
-if [ -x "$HOME/.local/bin/nvim" ]; then
-  echo "Running Neovim install scripts..."
-  bash "$DOTFILES/nvim/install-scripts/lsp-install.sh"
-  bash "$DOTFILES/nvim/install-scripts/plugins-install.sh"
-else
-  bash "$DOTFILES/nvim/install-scripts/nvim-install.sh"
-  bash "$DOTFILES/nvim/install-scripts/lsp-install.sh"
-  bash "$DOTFILES/nvim/install-scripts/plugins-install.sh"
-  exit 1
-fi
 
 echo "Dotfiles installation complete."
