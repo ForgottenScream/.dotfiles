@@ -15,7 +15,7 @@ dev--create-app-qube:
      - label: orange
    - features:
      - set:
-       - menu-items: mullvad-browser.desktop thunar.desktop st.desktop
+       - menu-items: mullvad-browser.desktop thunar.desktop st.desktop teams-for-linux.desktop
    - require:
      - qvm: dev--create-template
 
@@ -72,11 +72,43 @@ dev-mullvad-browser:
     - require:
       - cmd: dev-mullvad-add-repo
 
+dev-teams-for-linux-key:
+  cmd.run:
+    - name: curl -1sLf -o /tmp/teams-for-linux.asc https://repo.teamsforlinux.de/teams-for-linux.asc
+    - creates: /tmp/teams-for-linux.asc
+    - env:
+      - https_proxy: http://localhost:8082
+    - require:
+      - pkg: dev-core-packages
+
+dev-teams-for-linux-import:
+  cmd.run:
+    - name: rpm --import /tmp/teams-for-linux.asc
+    - require:
+      - cmd: dev-teams-for-linux-key
+
+dev-teams-for-linux-repo:
+  cmd.run:
+    - name: curl -1sLf -o /etc/yum.repos.d/teams-for-linux.repo https://repo.teamsforlinux.de/rpm/teams-for-linux.repo
+    - creates: /etc/yum.repos.d/teams-for-linux.repo
+    - env:
+      - https_proxy: http://localhost:8082
+    - require:
+      - cmd: dev-teams-for-linux-import
+
+dev-teams-for-linux:
+  pkg.installed:
+    - pkgs:
+      - teams-for-linux
+    - refresh: True
+    - require: 
+      - cmd: dev-teams-for-linux-repo
+
 {% elif grains['id'] == 'dev' %}
 
 dev-dotfiles-install:
   cmd.run:
-    - name: git clone https://codeberg.org/ForgottenScream/.dotfiles.git /home/user/.dotfiles
+    - name: git clone https://github.com/ForgottenScream/.dotfiles.git /home/user/.dotfiles
     - unless: test -d /home/user/.dotfiles
 
 dev-dotfiles-deploy:
