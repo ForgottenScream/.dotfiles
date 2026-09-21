@@ -25,10 +25,11 @@ dev-core-packages:
   pkg.installed:
     - pkgs:
       - curl
+      - qubes-core-agent
       - qubes-core-agent-passwordless-root
-      - qubes-usb-proxy
       - qubes-core-agent-networking
       - qubes-core-agent-thunar
+      - qubes-usb-proxy
       - zenity
       - zathura
       - zathura-pdf-poppler
@@ -44,6 +45,7 @@ dev-core-packages:
       - ripgrep
       - tree
       - neovim
+      - diff-so-fancy
       - zsh
       - zsh-syntax-highlighting
       - st
