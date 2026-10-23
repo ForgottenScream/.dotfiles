@@ -167,34 +167,53 @@ vim.api.nvim_set_hl(0, "Type", { fg = thm_cyan })
 
 vim.pack.add({
   {
-    name = "nvim-treesitter",
-    src = "https://github.com/nvim-treesitter/nvim-treesitter",
+      name = "nvim-treesitter",
+      src = "https://github.com/nvim-treesitter/nvim-treesitter",
   },
-  { name = "nvim-autopairs", src = "https://github.com/windwp/nvim-autopairs" },
-  { name = "nvim-surround", src = "https://github.com/kylechui/nvim-surround" },
+  { 
+      name = "nvim-autopairs",
+      src = "https://github.com/windwp/nvim-autopairs"
+  },
   {
-    name = "gitsigns.nvim",
-    src = "https://github.com/lewis6991/gitsigns.nvim",
-  },
-  { name = "nvim-lspconfig", src = "https://github.com/neovim/nvim-lspconfig" },
-  { name = "mason.nvim", src = "https://github.com/mason-org/mason.nvim" },
+      name = "nvim-surround",
+      src = "https://github.com/kylechui/nvim-surround" },
   {
-    name = "mason-lspconfig.nvim",
-    src = "https://github.com/mason-org/mason-lspconfig.nvim",
+      name = "gitsigns.nvim",
+      src = "https://github.com/lewis6991/gitsigns.nvim",
   },
-  { name = "indent-blankline", src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
-  { name = "blink.lib", src="https://github.com/saghen/blink.lib"},
-  { name = "blink.cmp", src="https://github.com/saghen/blink.cmp"},
+  {
+      name = "nvim-lspconfig",
+      src = "https://github.com/neovim/nvim-lspconfig"
+  },
+  { 
+      name = "mason.nvim",
+      src = "https://github.com/mason-org/mason.nvim"
+  },
+  {
+      name = "mason-lspconfig.nvim",
+      src = "https://github.com/mason-org/mason-lspconfig.nvim",
+  },
+  {
+      name = "indent-blankline",
+      src = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  {
+      name = "blink.lib",
+      src="https://github.com/saghen/blink.lib"
+  },
+  {
+      name = "blink.cmp",
+      src="https://github.com/saghen/blink.cmp"
+  },
+  {
+      name = "trouble.nvim",
+      src = "https://github.com/folke/trouble.nvim"
+  },
 })
 
 -- =========================================
 -- PLUGIN SETUP
 -- =========================================
-
-require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls" },
-})
 
 local function safe_setup(name, opts, after)
   local ok, mod = pcall(require, name)
@@ -210,6 +229,12 @@ local function safe_setup(name, opts, after)
     after(mod)
   end
 end
+
+safe_setup("mason", {})
+safe_setup("mason-lspconfig", {
+  ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls" },
+})
+
 
 safe_setup("ibl", {
   indent = {
@@ -289,7 +314,28 @@ safe_setup("gitsigns", {
   end,
 })
 
-require("blink.cmp").setup({
+safe_setup("trouble", {}, function()
+  map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", {
+    desc = "Workspace diagnostics",
+  })
+  map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", {
+    desc = "Buffer diagnostics",
+  })
+  map("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<CR>", {
+    desc = "Document symbols",
+  })
+  map("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<CR>", {
+    desc = "LSP references and definitions",
+  })
+  map("n", "<leader>xL", "<cmd>Trouble loclist toggle<CR>", {
+    desc = "Location list",
+  })
+  map("n", "<leader>xQ", "<cmd>Trouble qflist toggle<CR>", {
+    desc = "Quickfix list",
+  })
+end)
+
+safe_setup("blink.cmp", {
   keymap = {
     preset = "enter",
     ["<C-j>"] = { "select_next", "fallback" },
@@ -304,15 +350,16 @@ require("blink.cmp").setup({
   },
 })
 
-local capabilities = require("blink.cmp").get_lsp_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local ok, blink = pcall(require, "blink.cmp")
+if ok then
+  capabilities = blink.get_lsp_capabilities()
+end
 
 -- Treesitter setup must be after plugin is loaded by vim.pack
 -- Using pcall to handle case where plugin isn't available yet
-pcall(function()
-  require("nvim-treesitter.configs").setup({
-    ensure_installed = { "lua", "python", "javascript" },
-    sync_install = false,
-  })
+safe_setup("nvim-treesitter", {}, function()
+  require("nvim-treesitter").install({ "lua", "python", "javascript" })
 end)
 
 -- =========================================
@@ -466,8 +513,9 @@ vim.lsp.config("pyright", {
   filetypes = { "python" },
 })
 
-vim.lsp.config("ruff_lsp", {
+vim.lsp.config("ruff", {
   capabilities = capabilities,
+  cmd = { "ruff", "server" },
   filetypes = { "python" },
   init_options = {
     settings = {
@@ -485,3 +533,5 @@ vim.lsp.config("ts_ls", {
     "typescriptreact",
   },
 })
+
+vim.lsp.enable({ "lua_ls", "pyright", "ruff", "ts_ls" })
