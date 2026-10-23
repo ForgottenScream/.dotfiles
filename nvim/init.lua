@@ -128,104 +128,6 @@ map("n", "<leader>e", function()
   vim.cmd("Lexplore")
 end, { desc = "Toggle file explorer" })
 
-local latex_job = nil
-
-map("n", "<leader>la", function()
-  CreateLatex("zathura", "latexmk", "-shell-escape")
-end, { desc = "Run LaTeX automation" })
-
-map("n", "<leader>lw", function()
-  if latex_job then
-    print("LaTeX watcher is already running.")
-    return
-  end
-
-  local job_id = vim.fn.jobstart({ "make", "watch-silent" }, {
-    on_exit = function(_, exit_code)
-      if exit_code == 143 or exit_code == 0 then
-        print("LaTeX watcher stopped.")
-      else
-        print("LaTeX watcher exited with code " .. exit_code)
-      end
-      latex_job = nil
-    end,
-  })
-
-  if type(job_id) ~= "number" then
-    print("Failed to start LaTeX watcher.")
-    latex_job = nil
-    return
-  end
-
-  latex_job = job_id
-  print("Running LaTeX watch in the background...")
-end, { desc = "LaTeX watch" })
-
-map("n", "<leader>lx", function()
-  if latex_job then
-    vim.fn.jobstop(latex_job)
-    print("Stopped LaTeX watcher.")
-    latex_job = nil
-  else
-    print("No LaTeX watcher is currently running.")
-  end
-end, { desc = "Stop LaTeX watch" })
-
--- =========================================
--- FUNCTIONS
--- =========================================
-
-local function CreateLatex(viewer, compiler, flags)
-  local bufname = vim.fn.expand("%:t")
-  local file_ext = vim.fn.expand("%:e")
-  local file_name = vim.fn.expand("%:t:r")
-
-  if file_ext ~= "tex" or file_name == "" then
-    print("Current buffer is not a .tex file.")
-    return
-  end
-
-  if vim.fn.system("command -v " .. compiler) == "" then
-    print(compiler .. " is not installed. Please install it.")
-    return
-  end
-
-  if vim.fn.system("command -v " .. viewer) == "" then
-    print(viewer .. " is not installed. Please install it.")
-    return
-  end
-
-  local makefile_path = "./Makefile"
-  if vim.fn.filereadable(makefile_path) == 0 then
-    local makefile_content = string.format(
-      [[
-FILE ?= %s
-TEX := $(FILE).tex
-PDF := $(FILE).pdf
-LATEX := %s
-
-all: $(PDF)
-
-$(PDF): $(TEX)
-	$(LATEX) -pdf -silent $(TEX) >/dev/null 2>&1
-
-watch-silent: $(PDF)
-	$(LATEX) -pdf -pvc -interaction=nonstopmode -silent $(TEX) >/dev/null 2>&1
-
-clean:
-	$(LATEX) -c
-]],
-      file_name,
-      compiler
-    )
-
-    local file = io.open(makefile_path, "w")
-    file:write(makefile_content)
-    file:close()
-    print("Makefile created for " .. file_name)
-  end
-end
-
 -- =========================================
 -- THEME
 -- =========================================
@@ -274,18 +176,15 @@ vim.pack.add({
     name = "gitsigns.nvim",
     src = "https://github.com/lewis6991/gitsigns.nvim",
   },
-  { name = "nvim-cmp", src = "https://github.com/hrsh7th/nvim-cmp" },
-  { name = "cmp-nvim-lsp", src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
-  { name = "cmp-buffer", src = "https://github.com/hrsh7th/cmp-buffer" },
-  { name = "cmp-path", src = "https://github.com/hrsh7th/cmp-path" },
   { name = "nvim-lspconfig", src = "https://github.com/neovim/nvim-lspconfig" },
   { name = "mason.nvim", src = "https://github.com/mason-org/mason.nvim" },
   {
     name = "mason-lspconfig.nvim",
     src = "https://github.com/mason-org/mason-lspconfig.nvim",
   },
-  { name = "which-key.nvim", src = "https://github.com/folke/which-key.nvim" },
-  { name = "conform.nvim", src = "https://github.com/stevearc/conform.nvim" },
+  { name = "indent-blankline", src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
+  { name = "blink.lib", src="https://github.com/saghen/blink.lib"},
+  { name = "blink.cmp", src="https://github.com/saghen/blink.cmp"},
 })
 
 -- =========================================
@@ -311,6 +210,17 @@ local function safe_setup(name, opts, after)
     after(mod)
   end
 end
+
+safe_setup("ibl", {
+  indent = {
+    char = "│",
+    highlight = "LineNr",
+  },
+  scope = {
+    enabled = true,
+    highlight = "Function",
+  },
+})
 
 safe_setup("nvim-autopairs")
 
@@ -379,57 +289,22 @@ safe_setup("gitsigns", {
   end,
 })
 
-safe_setup("which-key", {
-  plugins = { spelling = true },
-  defaults = {
-    ["<leader>e"] = { desc = "+file-explorer" },
-    ["<leader>h"] = { desc = "+git" },
-    ["<leader>l"] = { desc = "+latex" },
-    ["<leader>c"] = { desc = "+code" },
-    ["<leader>r"] = { desc = "+lsp" },
-    ["<leader>d"] = { desc = "+diagnostics" },
-    ["g"] = { desc = "+goto" },
-    ["["] = { desc = "+prev" },
-    ["]"] = { desc = "+next" },
-    ["<leader>la"] = { desc = "Run LaTeX automation" },
-    ["<leader>lw"] = { desc = "LaTeX watch" },
-    ["<leader>lx"] = { desc = "Stop LaTeX watch" },
-    ["<leader>ca"] = { desc = "Code actions" },
-    ["<leader>rn"] = { desc = "Rename" },
-    ["<leader>rs"] = { desc = "Restart LSP" },
-  },
-})
-
-safe_setup("conform", {
-  formatters_by_ft = {
-    lua = { "stylua" },
-    python = { "ruff_format" },
-    javascript = { "prettier" },
-    typescript = { "prettier" },
-  },
-  format_on_save = {
-    lsp_fallback = true,
-  },
-})
-
-safe_setup("cmp", {
-  mapping = {
-    ["<C-j>"] = require("cmp").mapping.select_next_item(),
-    ["<C-k>"] = require("cmp").mapping.select_prev_item(),
-    ["<CR>"] = require("cmp").mapping.confirm({ select = true }),
-    ["<C-Space>"] = require("cmp").mapping.complete(),
+require("blink.cmp").setup({
+  keymap = {
+    preset = "enter",
+    ["<C-j>"] = { "select_next", "fallback" },
+    ["<C-k>"] = { "select_prev", "fallback" },
+    ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
   },
   sources = {
-    { name = "nvim_lsp" },
-    { name = "buffer" },
-    { name = "path" },
+    default = { "lsp", "path", "snippets", "buffer" },
   },
-}, function(cmp)
-  local ok_ap, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
-  if ok_ap then
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-  end
-end)
+  fuzzy = {
+    implementation = "lua",
+  },
+})
+
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 -- Treesitter setup must be after plugin is loaded by vim.pack
 -- Using pcall to handle case where plugin isn't available yet
@@ -548,8 +423,6 @@ vim.diagnostic.config({
   update_in_insert = false,
   severity_sort = true,
 })
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 vim.lsp.config("lua_ls", {
   capabilities = capabilities,
