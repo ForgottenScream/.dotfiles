@@ -69,7 +69,6 @@ PS1='\w '"$CYAN"'> '"$RESET"
 alias l='ls -1t --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
-alias shred='shred -vfzu'
 
 alias aliases='vim ~/.bashrc'
 

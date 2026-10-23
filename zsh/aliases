@@ -4,8 +4,6 @@
 alias l='ls -1t --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 
-# shred (external tool)
-alias shred='shred -vfzu'
 
 # Open/edit your bash aliases file
 alias aliases='vim ~/.bash_aliases'
