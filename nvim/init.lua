@@ -75,27 +75,27 @@ vim.g.netrw_winsize = 25
 local augroup = vim.api.nvim_create_augroup("UserConfig", {})
 
 vim.api.nvim_create_autocmd({ "TermOpen" }, {
-  group = augroup,
-  pattern = "*",
-  callback = function()
-    vim.cmd("setlocal nospell")
-  end,
+    group = augroup,
+    pattern = "*",
+    callback = function()
+        vim.cmd("setlocal nospell")
+    end,
 })
 
 vim.api.nvim_create_autocmd("TermClose", {
-  group = augroup,
-  callback = function()
-    if vim.v.event.status == 0 then
-      vim.api.nvim_buf_delete(0, {})
-    end
-  end,
+    group = augroup,
+    callback = function()
+        if vim.v.event.status == 0 then
+            vim.api.nvim_buf_delete(0, {})
+        end
+    end,
 })
 
 vim.api.nvim_create_autocmd("VimResized", {
-  group = augroup,
-  callback = function()
-    vim.cmd("tabdo wincmd =")
-  end,
+    group = augroup,
+    callback = function()
+        vim.cmd("tabdo wincmd =")
+    end,
 })
 
 vim.opt.showtabline = 1
@@ -111,21 +111,21 @@ vim.g.maplocalleader = " "
 local map = vim.keymap.set
 
 map(
-  "i",
-  "tn",
-  "<Esc>",
-  { noremap = true, silent = true, desc = "Escape from insert mode" }
+    "i",
+    "tn",
+    "<Esc>",
+    { noremap = true, silent = true, desc = "Escape from insert mode" }
 )
 
 map("n", "<leader>e", function()
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    local buf = vim.api.nvim_win_get_buf(win)
-    if vim.bo[buf].filetype == "netrw" then
-      vim.api.nvim_win_close(win, true)
-      return
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        local buf = vim.api.nvim_win_get_buf(win)
+        if vim.bo[buf].filetype == "netrw" then
+            vim.api.nvim_win_close(win, true)
+            return
+        end
     end
-  end
-  vim.cmd("Lexplore")
+    vim.cmd("Lexplore")
 end, { desc = "Toggle file explorer" })
 
 -- =========================================
@@ -166,49 +166,62 @@ vim.api.nvim_set_hl(0, "Type", { fg = thm_cyan })
 -- =========================================
 
 vim.pack.add({
-  {
-      name = "nvim-treesitter",
-      src = "https://github.com/nvim-treesitter/nvim-treesitter",
-  },
-  { 
-      name = "nvim-autopairs",
-      src = "https://github.com/windwp/nvim-autopairs"
-  },
-  {
-      name = "nvim-surround",
-      src = "https://github.com/kylechui/nvim-surround" },
-  {
-      name = "gitsigns.nvim",
-      src = "https://github.com/lewis6991/gitsigns.nvim",
-  },
-  {
-      name = "nvim-lspconfig",
-      src = "https://github.com/neovim/nvim-lspconfig"
-  },
-  { 
-      name = "mason.nvim",
-      src = "https://github.com/mason-org/mason.nvim"
-  },
-  {
-      name = "mason-lspconfig.nvim",
-      src = "https://github.com/mason-org/mason-lspconfig.nvim",
-  },
-  {
-      name = "indent-blankline",
-      src = "https://github.com/lukas-reineke/indent-blankline.nvim"
-  },
-  {
-      name = "blink.lib",
-      src="https://github.com/saghen/blink.lib"
-  },
-  {
-      name = "blink.cmp",
-      src="https://github.com/saghen/blink.cmp"
-  },
-  {
-      name = "trouble.nvim",
-      src = "https://github.com/folke/trouble.nvim"
-  },
+    {
+        name = "nvim-treesitter",
+        src = "https://github.com/nvim-treesitter/nvim-treesitter",
+    },
+    {
+        name = "nvim-autopairs",
+        src = "https://github.com/windwp/nvim-autopairs"
+    },
+    {
+        name = "nvim-surround",
+        src = "https://github.com/kylechui/nvim-surround"
+    },
+    {
+        name = "gitsigns.nvim",
+        src = "https://github.com/lewis6991/gitsigns.nvim",
+    },
+    {
+        name = "nvim-lspconfig",
+        src = "https://github.com/neovim/nvim-lspconfig"
+    },
+    {
+        name = "mason.nvim",
+        src = "https://github.com/mason-org/mason.nvim"
+    },
+    {
+        name = "mason-lspconfig.nvim",
+        src = "https://github.com/mason-org/mason-lspconfig.nvim",
+    },
+    {
+        name = "indent-blankline",
+        src = "https://github.com/lukas-reineke/indent-blankline.nvim"
+    },
+    {
+        name = "blink.lib",
+        src="https://github.com/saghen/blink.lib"
+    },
+    {
+        name = "blink.cmp",
+        src="https://github.com/saghen/blink.cmp"
+    },
+    {
+        name = "trouble.nvim",
+        src = "https://github.com/folke/trouble.nvim"
+    },
+    {
+        name = "plenary.nvim",
+        src = "https://github.com/nvim-lua/plenary.nvim",
+    },
+    {
+        name = "telescope.nvim",
+        src = "https://github.com/nvim-telescope/telescope.nvim",
+    },
+    {
+        name = "todo-comments.nvim",
+        src = "https://github.com/folke/todo-comments.nvim",
+    },
 })
 
 -- =========================================
@@ -216,35 +229,35 @@ vim.pack.add({
 -- =========================================
 
 local function safe_setup(name, opts, after)
-  local ok, mod = pcall(require, name)
-  if not ok then
-    return
-  end
+    local ok, mod = pcall(require, name)
+    if not ok then
+        return
+    end
 
-  if type(mod.setup) == "function" then
-    mod.setup(opts or {})
-  end
+    if type(mod.setup) == "function" then
+        mod.setup(opts or {})
+    end
 
-  if type(after) == "function" then
-    after(mod)
-  end
+    if type(after) == "function" then
+        after(mod)
+    end
 end
 
 safe_setup("mason", {})
 safe_setup("mason-lspconfig", {
-  ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls" },
+    ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls" },
 })
 
 
 safe_setup("ibl", {
-  indent = {
-    char = "│",
-    highlight = "LineNr",
-  },
-  scope = {
-    enabled = true,
-    highlight = "Function",
-  },
+    indent = {
+        char = "│",
+        highlight = "LineNr",
+    },
+    scope = {
+        enabled = true,
+        highlight = "Function",
+    },
 })
 
 safe_setup("nvim-autopairs")
@@ -252,114 +265,144 @@ safe_setup("nvim-autopairs")
 safe_setup("nvim-surround")
 
 safe_setup("gitsigns", {
-  on_attach = function(bufnr)
-    local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
-    end
+    on_attach = function(bufnr)
+        local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+        end
 
-    map("n", "]c", function()
-      if vim.wo.diff then
-        vim.cmd.normal({ "]c", bang = true })
-      else
-        require("gitsigns").nav_hunk("next")
-      end
-    end)
+        map("n", "]c", function()
+            if vim.wo.diff then
+                vim.cmd.normal({ "]c", bang = true })
+            else
+                require("gitsigns").nav_hunk("next")
+            end
+        end)
 
-    map("n", "[c", function()
-      if vim.wo.diff then
-        vim.cmd.normal({ "[c", bang = true })
-      else
-        require("gitsigns").nav_hunk("prev")
-      end
-    end)
+        map("n", "[c", function()
+            if vim.wo.diff then
+                vim.cmd.normal({ "[c", bang = true })
+            else
+                require("gitsigns").nav_hunk("prev")
+            end
+        end)
 
-    map("n", "<leader>hs", require("gitsigns").stage_hunk)
-    map("n", "<leader>hr", require("gitsigns").reset_hunk)
+        map("n", "<leader>hs", require("gitsigns").stage_hunk)
+        map("n", "<leader>hr", require("gitsigns").reset_hunk)
 
-    map("v", "<leader>hs", function()
-      require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-    end)
+        map("v", "<leader>hs", function()
+            require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end)
 
-    map("v", "<leader>hr", function()
-      require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-    end)
+        map("v", "<leader>hr", function()
+            require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end)
 
-    map("n", "<leader>hS", require("gitsigns").stage_buffer)
-    map("n", "<leader>hR", require("gitsigns").reset_buffer)
-    map("n", "<leader>hp", require("gitsigns").preview_hunk)
-    map("n", "<leader>hi", require("gitsigns").preview_hunk_inline)
+        map("n", "<leader>hS", require("gitsigns").stage_buffer)
+        map("n", "<leader>hR", require("gitsigns").reset_buffer)
+        map("n", "<leader>hp", require("gitsigns").preview_hunk)
+        map("n", "<leader>hi", require("gitsigns").preview_hunk_inline)
 
-    map("n", "<leader>hb", function()
-      require("gitsigns").blame_line({ full = true })
-    end)
+        map("n", "<leader>hb", function()
+            require("gitsigns").blame_line({ full = true })
+        end)
 
-    map("n", "<leader>hd", require("gitsigns").diffthis)
+        map("n", "<leader>hd", require("gitsigns").diffthis)
 
-    map("n", "<leader>hD", function()
-      require("gitsigns").diffthis("~")
-    end)
+        map("n", "<leader>hD", function()
+            require("gitsigns").diffthis("~")
+        end)
 
-    map("n", "<leader>hQ", function()
-      require("gitsigns").setqflist("all")
-    end)
+        map("n", "<leader>hQ", function()
+            require("gitsigns").setqflist("all")
+        end)
 
-    map("n", "<leader>hq", require("gitsigns").setqflist)
+        map("n", "<leader>hq", require("gitsigns").setqflist)
 
-    map("n", "<leader>tb", require("gitsigns").toggle_current_line_blame)
-    map("n", "<leader>tw", require("gitsigns").toggle_word_diff)
+        map("n", "<leader>tb", require("gitsigns").toggle_current_line_blame)
+        map("n", "<leader>tw", require("gitsigns").toggle_word_diff)
 
-    map({ "o", "x" }, "ih", require("gitsigns").select_hunk)
-  end,
+        map({ "o", "x" }, "ih", require("gitsigns").select_hunk)
+    end,
 })
 
 safe_setup("trouble", {}, function()
-  map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", {
-    desc = "Workspace diagnostics",
-  })
-  map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", {
-    desc = "Buffer diagnostics",
-  })
-  map("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<CR>", {
-    desc = "Document symbols",
-  })
-  map("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<CR>", {
-    desc = "LSP references and definitions",
-  })
-  map("n", "<leader>xL", "<cmd>Trouble loclist toggle<CR>", {
-    desc = "Location list",
-  })
-  map("n", "<leader>xQ", "<cmd>Trouble qflist toggle<CR>", {
-    desc = "Quickfix list",
-  })
+    map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", {
+        desc = "Workspace diagnostics",
+    })
+    map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", {
+        desc = "Buffer diagnostics",
+    })
+    map("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<CR>", {
+        desc = "Document symbols",
+    })
+    map("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<CR>", {
+        desc = "LSP references and definitions",
+    })
+    map("n", "<leader>xL", "<cmd>Trouble loclist toggle<CR>", {
+        desc = "Location list",
+    })
+    map("n", "<leader>xQ", "<cmd>Trouble qflist toggle<CR>", {
+        desc = "Quickfix list",
+    })
 end)
 
 safe_setup("blink.cmp", {
-  keymap = {
-    preset = "enter",
-    ["<C-j>"] = { "select_next", "fallback" },
-    ["<C-k>"] = { "select_prev", "fallback" },
-    ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
-  },
-  sources = {
-    default = { "lsp", "path", "snippets", "buffer" },
-  },
-  fuzzy = {
-    implementation = "lua",
-  },
+    keymap = {
+        preset = "enter",
+        ["<C-j>"] = { "select_next", "fallback" },
+        ["<C-k>"] = { "select_prev", "fallback" },
+        ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+    },
+    sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+    },
+    fuzzy = {
+        implementation = "lua",
+    },
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local ok, blink = pcall(require, "blink.cmp")
 if ok then
-  capabilities = blink.get_lsp_capabilities()
+    capabilities = blink.get_lsp_capabilities()
 end
+
+safe_setup("telescope", {
+    defaults = {
+        mappings = {
+            i = {
+                ["tn"] = require("telescope.actions").close,
+            },
+        },
+    },
+}, function()
+    local builtin = require("telescope.builtin")
+
+    map("n", "<leader>ff", builtin.find_files, {
+        desc = "Find files",
+    })
+    map("n", "<leader>fg", builtin.live_grep, {
+        desc = "Search text",
+    })
+    map("n", "<leader>fb", builtin.buffers, {
+        desc = "Find buffers",
+    })
+    map("n", "<leader>fh", builtin.help_tags, {
+        desc = "Search help",
+    })
+end)
+safe_setup("todo-comments", {}, function()
+    map("n", "<leader>ft", "<cmd>TodoTelescope<CR>", {
+        desc = "Find TODO comments",
+    })
+end)
 
 -- Treesitter setup must be after plugin is loaded by vim.pack
 -- Using pcall to handle case where plugin isn't available yet
 safe_setup("nvim-treesitter", {}, function()
-  require("nvim-treesitter").install({ "lua", "python", "javascript" })
+    require("nvim-treesitter").install({ "lua", "python", "javascript" })
 end)
 
 -- =========================================
@@ -369,169 +412,169 @@ end)
 local keymap = vim.keymap.set
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
-  callback = function(ev)
-    local opts = { buffer = ev.buf, silent = true }
+    group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
+    callback = function(ev)
+        local opts = { buffer = ev.buf, silent = true }
 
-    keymap(
-      "n",
-      "gD",
-      vim.lsp.buf.declaration,
-      vim.tbl_extend("force", opts, { desc = "Go to declaration" })
-    )
-    keymap(
-      "n",
-      "gd",
-      vim.lsp.buf.definition,
-      vim.tbl_extend("force", opts, { desc = "Go to definition" })
-    )
-    keymap(
-      "n",
-      "gi",
-      vim.lsp.buf.implementation,
-      vim.tbl_extend("force", opts, { desc = "Go to implementation" })
-    )
-    keymap(
-      "n",
-      "gt",
-      vim.lsp.buf.type_definition,
-      vim.tbl_extend("force", opts, { desc = "Go to type definition" })
-    )
-    keymap(
-      "n",
-      "gR",
-      vim.lsp.buf.references,
-      vim.tbl_extend("force", opts, { desc = "List references" })
-    )
+        keymap(
+            "n",
+            "gD",
+            vim.lsp.buf.declaration,
+            vim.tbl_extend("force", opts, { desc = "Go to declaration" })
+        )
+        keymap(
+            "n",
+            "gd",
+            vim.lsp.buf.definition,
+            vim.tbl_extend("force", opts, { desc = "Go to definition" })
+        )
+        keymap(
+            "n",
+            "gi",
+            vim.lsp.buf.implementation,
+            vim.tbl_extend("force", opts, { desc = "Go to implementation" })
+        )
+        keymap(
+            "n",
+            "gt",
+            vim.lsp.buf.type_definition,
+            vim.tbl_extend("force", opts, { desc = "Go to type definition" })
+        )
+        keymap(
+            "n",
+            "gR",
+            vim.lsp.buf.references,
+            vim.tbl_extend("force", opts, { desc = "List references" })
+        )
 
-    keymap(
-      { "n", "v" },
-      "<leader>ca",
-      vim.lsp.buf.code_action,
-      vim.tbl_extend("force", opts, { desc = "Code actions" })
-    )
-    keymap(
-      "n",
-      "<leader>rn",
-      vim.lsp.buf.rename,
-      vim.tbl_extend("force", opts, { desc = "Rename" })
-    )
+        keymap(
+            { "n", "v" },
+            "<leader>ca",
+            vim.lsp.buf.code_action,
+            vim.tbl_extend("force", opts, { desc = "Code actions" })
+        )
+        keymap(
+            "n",
+            "<leader>rn",
+            vim.lsp.buf.rename,
+            vim.tbl_extend("force", opts, { desc = "Rename" })
+        )
 
-    keymap(
-      "n",
-      "K",
-      vim.lsp.buf.hover,
-      vim.tbl_extend("force", opts, { desc = "Hover documentation" })
-    )
+        keymap(
+            "n",
+            "K",
+            vim.lsp.buf.hover,
+            vim.tbl_extend("force", opts, { desc = "Hover documentation" })
+        )
 
-    keymap(
-      "n",
-      "<leader>d",
-      vim.diagnostic.open_float,
-      vim.tbl_extend("force", opts, { desc = "Line diagnostics" })
-    )
-    keymap("n", "[d", function()
-        vim.diagnostic.jump({
-            count = -1,
-            on_jump = function()
-                vim.diagnostic.open_float(nil, { focus = true })
-            end,
-        })
-    end, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
+        keymap(
+            "n",
+            "<leader>d",
+            vim.diagnostic.open_float,
+            vim.tbl_extend("force", opts, { desc = "Line diagnostics" })
+        )
+        keymap("n", "[d", function()
+            vim.diagnostic.jump({
+                count = -1,
+                on_jump = function()
+                    vim.diagnostic.open_float(nil, { focus = true })
+                end,
+            })
+        end, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
 
-    keymap("n", "]d", function()
-        vim.diagnostic.jump({
-            count = 1,
-            on_jump = function()
-                vim.diagnostic.open_float(nil, { focus = true })
-            end,
-        })
-    end, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
+        keymap("n", "]d", function()
+            vim.diagnostic.jump({
+                count = 1,
+                on_jump = function()
+                    vim.diagnostic.open_float(nil, { focus = true })
+                end,
+            })
+        end, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
 
-    keymap(
-      "n",
-      "<leader>rs",
-      "<cmd>LspRestart<CR>",
-      vim.tbl_extend("force", opts, { desc = "Restart LSP" })
-    )
-  end,
+        keymap(
+            "n",
+            "<leader>rs",
+            "<cmd>LspRestart<CR>",
+            vim.tbl_extend("force", opts, { desc = "Restart LSP" })
+        )
+    end,
 })
 
 vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "X ",
-      [vim.diagnostic.severity.WARN] = "! ",
-      [vim.diagnostic.severity.INFO] = "? ",
-      [vim.diagnostic.severity.HINT] = "i ",
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "X ",
+            [vim.diagnostic.severity.WARN] = "! ",
+            [vim.diagnostic.severity.INFO] = "? ",
+            [vim.diagnostic.severity.HINT] = "i ",
+        },
     },
-  },
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
 })
 
 vim.lsp.config("lua_ls", {
-  capabilities = capabilities,
-  filetypes = { "lua" },
-  root_dir = function(fname)
-    if type(fname) ~= "string" then
-      return nil
-    end
-    local found = vim.fs.find(
-      { "init.lua", ".git" },
-      { upward = true, path = fname }
-    )
-    if #found == 0 then
-      return nil
-    end
-    return vim.fs.dirname(found[1])
-  end,
-  settings = {
-    Lua = {
-      runtime = {
-        version = "LuaJIT",
-      },
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-        checkThirdParty = false,
-        ignoreDir = { ".git", "node_modules", ".cache", ".local" },
-        maxPreload = 0,
-      },
-      telemetry = {
-        enable = false,
-      },
+    capabilities = capabilities,
+    filetypes = { "lua" },
+    root_dir = function(fname)
+        if type(fname) ~= "string" then
+            return nil
+        end
+        local found = vim.fs.find(
+            { "init.lua", ".git" },
+            { upward = true, path = fname }
+        )
+        if #found == 0 then
+            return nil
+        end
+        return vim.fs.dirname(found[1])
+    end,
+    settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+            },
+            diagnostics = {
+                globals = { "vim" },
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
+                ignoreDir = { ".git", "node_modules", ".cache", ".local" },
+                maxPreload = 0,
+            },
+            telemetry = {
+                enable = false,
+            },
+        },
     },
-  },
 })
 
 vim.lsp.config("pyright", {
-  capabilities = capabilities,
-  filetypes = { "python" },
+    capabilities = capabilities,
+    filetypes = { "python" },
 })
 
 vim.lsp.config("ruff", {
-  capabilities = capabilities,
-  cmd = { "ruff", "server" },
-  filetypes = { "python" },
-  init_options = {
-    settings = {
-      lineLength = 80,
+    capabilities = capabilities,
+    cmd = { "ruff", "server" },
+    filetypes = { "python" },
+    init_options = {
+        settings = {
+            lineLength = 80,
+        },
     },
-  },
 })
 
 vim.lsp.config("ts_ls", {
-  capabilities = capabilities,
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-  },
+    capabilities = capabilities,
+    filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+    },
 })
 
 vim.lsp.enable({ "lua_ls", "pyright", "ruff", "ts_ls" })
