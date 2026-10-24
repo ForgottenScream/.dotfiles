@@ -25,6 +25,11 @@ echo "Starting dotfiles installation..."
 #######
 link "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
 
+#########
+# helix #
+#########
+link "$DOTFILES/helix" "$HOME/.config/helix"
+
 ########
 # nvim #
 ########

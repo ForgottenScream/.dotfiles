@@ -1,0 +1,51 @@
+theme = "tokyonight_moon"
+
+[editor]
+line-number = "absolute"
+mouse = false
+scrolloff = 8
+rulers = [80]
+cursorline = true
+bufferline = "multiple"
+
+[editor.indent-guides]
+render = true
+
+[editor.soft-wrap]
+enable = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[keys.insert.t]
+n = "normal_mode"
+
+[keys.select.t]
+n = "exit_select_mode"
+
+[keys.normal.space.h]
+r = ":reset-diff-change"
+
+[keys.normal]
+C-l = [
+  ":write-all",
+  ":insert-output lazygit >/dev/tty",
+  ":redraw",
+  ":reload-all"
+]
+C-e = ["scroll_down", "move_line_down"]
+C-y = ["scroll_up", "move_line_up"]
+
+[keys.select]
+# lazygit integration
+C-l = [
+  ":write-all",
+  ":insert-output lazygit >/dev/tty",
+  ":redraw",
+  ":reload-all"
+]
