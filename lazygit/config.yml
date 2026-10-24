@@ -1,0 +1,12 @@
+gui:
+  animateExplosion: false
+  commitHashLength: 0
+  quitOnTopLevelReturn: true
+  showBottomLine: false
+  showCommandLog: false
+  showIcons: false
+  showListFooter: false
+  showPanelJumps: false
+  statusPanelView: allBranchesLog
+update:
+  method: never

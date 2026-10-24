@@ -25,6 +25,11 @@ echo "Starting dotfiles installation..."
 #######
 link "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
 
+###########
+# lazygit #
+###########
+link "$DOTFILES/lazygit/" "$HOME/.config/lazygit"
+
 #########
 # helix #
 #########
