@@ -12,12 +12,11 @@ set $terminal qubes-i3-sensible-terminal
 set $console qubes-i3-sensible-terminal console
 set $file-manager qubes-i3-file-manager
 
+set $lock i3lock --nofork --image /usr/share/backgrounds/windows_xp_lockscreen.png --no-unlock-indicator --pointer win
+
 #set $desktop_autostart dex-autostart --autostart --environment=i3 --term=qubes-i3-sensible-terminal
 set $desktop_autostart qubes-i3-xdg-autostart
-## VARS END ##
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
 font pango:monospace 18
 
 # Background using feh
@@ -91,6 +90,22 @@ client.focused_inactive black   #5b5b5b #1e1e1e #e5e5e5 #e1e1e1
 client.unfocused        black   #5b5b5b #141414 #cccccc #ebebeb
 client.urgent           black   #bd2727 #e79e27 #333333 #27bdbd
 
+# Start i3bar
+bar {
+  status_command qubes-i3status
+  position top
+  colors {
+      background #d2d2d2
+      statusline #333333
+
+      #class               #border #backgr #text
+      focused_workspace    #3874d8 #63a0ff #333333
+      active_workspace     #333333 #888888 #f5f5f5
+      inactive_workspace   #888888 #333333 #888888
+      urgent_workspace     #bd2727 #e79e27 #333333
+  }
+}
+
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -113,28 +128,14 @@ bindsym $mod+e focus down
 bindsym $mod+i focus up
 bindsym $mod+o focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
 # move focused window
 bindsym $mod+Shift+n move left
 bindsym $mod+Shift+e move down
 bindsym $mod+Shift+i move up
 bindsym $mod+Shift+o move right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
+# split in horizontal or vertical orientation
 bindsym $mod+h split h
-
-# split in vertical orientation
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
@@ -154,18 +155,11 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
-#bindsym $mod+d focus child
-
-# move the currently focused window to the scratchpad
+# Scratchpad hide and show
 bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+Shift+plus scratchpad show
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
+# Define names for default workspaces
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -187,74 +181,45 @@ bindsym $mod+Shift+3 move container to workspace number $ws3
 bindsym $mod+Shift+4 move container to workspace number $ws4
 bindsym $mod+Shift+5 move container to workspace number $ws5
 
-# reload the configuration file
+# i3 config reload & restart
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+p restart
 
-# set shutdown, restart and locking features
+# Power Controls
+set $mode_system (l)ock, (e)xit, (r)eboot, (s)hutdown
+bindsym $mod+Shift+f mode "$mode_system"
 mode "$mode_system" {
-	bindsym l exec --no-startup-id i3lock --nofork --image /usr/share/backgrounds/windows_xp_lockscreen.png --no-unlock-indicator --pointer win, mode "default"
+	bindsym l $lock, mode "default"
 	bindsym e exec --no-startup-id i3msg exit, mode "default"
 	bindsym r exec --no-startup-id systemctl reboot, mode "default"
-	bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"
-	
-	# to exit system mode use 'Enter', 'Escape' or 'q'
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+	bindsym s exec --no-startup-id systemctl poweroff, mode "default"
 	bindsym q mode "default"
 }
 
-set $mode_system (l)ock, (e)xit, (r)eboot, (s)hutdown
-bindsym $mod+Shift+f mode "$mode_system"
-
-# resize window (you can also use the mouse for that)
-mode "resize" {
+# Resizing mode
+set "$mode_resize" Resize: 10px n e i o (q)uit
+bindsym $mod+p mode "$mode_resize"
+mode "$mode_resize" {
         bindsym n resize shrink width 10 px or 10 ppt
         bindsym e resize grow height 10 px or 10 ppt
         bindsym i resize shrink height 10 px or 10 ppt
         bindsym o resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
         bindsym q mode "default"
-        bindsym $mod+p mode "default"
 }
 
-bindsym $mod+p mode "resize"
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command qubes-i3status
-	position top
-        colors {
-            background #d2d2d2
-            statusline #333333
-
-            #class               #border #backgr #text
-            focused_workspace    #3874d8 #63a0ff #333333
-            active_workspace     #333333 #888888 #f5f5f5
-            inactive_workspace   #888888 #333333 #888888
-            urgent_workspace     #bd2727 #e79e27 #333333
-        }
-}
-
-# Avoids screen size fingerprinting
-assign [title="Signal"] workspace 3
 assign [title="Mullvad Browser"] workspace 2
+assign [title="Signal"] workspace 3
 assign [title="Tor Browser"] workspace 5
 
-bindsym $mod+s exec --no-startup-id qvm-run coms signal-desktop
-bindsym $mod+g exec --no-startup-id qvm-run --dispvm whonix-workstation-18-dvm torbrowser
-bindsym $mod+m exec --no-startup-id qubes-i3-run-app sys-mullvad mullvad-browser
+# Launcher mode
+set $mode_launcher Launch: [s]ignal [t]or [m]ullvad-browser
+bindsym $mod+Shift+d "$mode_launcher"
+mode "$mode_launcher" {
+      bindsym s exec --no-startup-id qvm-run coms signal-desktop, mode "default"
+      bindsym t exec --no-startup-id qvm-run --dispvm whonix-workstation-18-dvm torbrowser, mode "default"
+      bindsym m exec --no-startup-id qubes-i3-run-app sys-mullvad mullvad-browser, mode "default"
+      bindsym q mode "default"
+  }
 
 # Make sure all xdg autostart entries are started, this is (among other things)
 # necessary to make sure transient vm's come up
